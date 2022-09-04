@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Login from "./components/Login";
+import Matches from "./components/Matches";
+import Home from "./components/Home";
+import PublicRoutes from "./components/PublicRoutes";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import PrivateRoutes from "./components/PrivateRoutes";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<PublicRoutes/>}>
+            <Route element={<Login/>} path="/login"/>
+          </Route>
+          <Route element={<PrivateRoutes/>}>
+            <Route element={<Matches/>} path="/"/> {/*Esta ruta debe ser pública y debe llevar al login cuando esté la funcionalidad*/}
+            <Route element={<Home/>} path="/home"/>
+            <Route element={<Matches/>} path="/matches"/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
+
+
 
 export default App;
