@@ -23,7 +23,7 @@ const Home = () => {
     }
 
     const competitionMatches = (id) => {
-        navigate("/matches");
+        navigate(`/matches/${id}`);
     };
 
     useEffect(() => {
