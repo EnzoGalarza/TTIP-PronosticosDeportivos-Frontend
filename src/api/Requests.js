@@ -10,4 +10,8 @@ const getCompetitions = () => {
     return axios.get("http://localhost:8080/competitions", getToken())
 }
 
-export default {getCompetitions}
+const exportedObject = {
+    getCompetitions
+}
+
+export default exportedObject;
