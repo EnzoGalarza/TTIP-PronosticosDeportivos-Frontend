@@ -40,12 +40,10 @@ const Home = () => {
                 (<div class="competitions">
                     {competitionsData.competitions.map(competition =>{
                         return(
-                        <span>
-                            <figure class="competition" onClick={() => competitionMatches(competition.code)}>
-                                <img src={competition.emblem} class="comppic" alt={competition.name}/>
-                                <figcaption>{competition.name}</figcaption>
-                            </figure>
-                        </span>
+                        <div class="competition">
+                            <img src={competition.emblem} class="comppic" alt={competition.name} onClick={() => competitionMatches(competition.code)}/>
+                            <div class="compText">{competition.name}</div>
+                        </div>
                         )
                     })}
                 </div>

@@ -1,18 +1,40 @@
-#competition{
+.competitions{
+    text-align: center;
+}
+
+.competition{
     text-align: center;
     width: 150px;
+    padding: 2cm;
+    width: 5cm;
+    height: auto;
+    display: inline-block;
   }
+
+.compText{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5%;
+    font-size: 120%;
+}
 
 img.comppic{
     cursor: pointer;
     width: 150px;
     height: 150px;
+    padding: 20px;
     text-align: center;
+    display: inline-block;
 }
 
 img.comppic:hover{
     cursor: pointer;
     width: 175px;
     height: 175px;
+    padding: 0px;
     text-align: center;
+    display: inline-block;
 }
