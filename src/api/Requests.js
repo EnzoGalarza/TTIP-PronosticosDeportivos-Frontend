@@ -10,8 +10,13 @@ const getCompetitions = () => {
     return axios.get("http://localhost:8080/competitions", getToken())
 }
 
+const getMatches = (compId) => {
+    return axios.get(`http://localhost:8080/matches/${compId}`,getToken())
+}
+
 const exportedObject = {
-    getCompetitions
+    getCompetitions,
+    getMatches
 }
 
 export default exportedObject;
