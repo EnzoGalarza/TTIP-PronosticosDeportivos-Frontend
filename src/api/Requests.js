@@ -14,9 +14,14 @@ const getMatches = (compId) => {
     return axios.get(`http://localhost:8080/matches/${compId}`,getToken())
 }
 
+const getPronosticos = (user) => {
+    return axios.get(`http://localhost:8080/pronosticos/${user}`,getToken())
+}
+
 const exportedObject = {
     getCompetitions,
-    getMatches
+    getMatches,
+    getPronosticos
 }
 
 export default exportedObject;
