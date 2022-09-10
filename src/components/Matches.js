@@ -11,6 +11,19 @@ const Matches = () => {
         matches: []
     })
 
+    const [pronosticosData, setPronosticosData] = useState({
+        pronosticos: []
+    })
+
+    const updatePronosticos = () => {
+        api.getPronosticos("pedro")
+        .then((response) => {
+            setPronosticosData({
+                pronosticos: response.data
+            })
+        }).catch((error) => {console.log(error)})
+    }
+
     const updateMatches = () => {
         api.getMatches(compId)
         .then((response) => {
@@ -23,6 +36,7 @@ const Matches = () => {
 
     useEffect(() => {
         updateMatches();
+        updatePronosticos();
     },[compId]);
 
     return (
@@ -32,36 +46,44 @@ const Matches = () => {
             </header>
             <div class="matches-page">
             { matchesData.matches.length > 0 &&
-                (<div class="matches">
+                (<div className="matches">
                     {matchesData.matches.map(match =>{
                         return(
-                        <div class="match">
+                        <div className="match">
                            <div>
-                                {match.status == "SCHEDULED" ? match.utcDate : match.status}
+                                {match.status === "SCHEDULED" ? match.utcDate : match.status}
                            </div> 
 
-                           <div class="team"> 
-                                <img src={match.homeTeam.crest} class="teamCrest" alt={match.homeTeam.name} />
-                                <div class="teamName">{match.homeTeam.name}</div>
+                           <div className="team"> 
+                                <img src={match.homeTeam.crest} className="teamCrest" alt={match.homeTeam.name} />
+                                <div className="teamName">{match.homeTeam.name}</div>
                            </div>     
 
-                           <div class="team">
-                                {match.status == "FINISHED" ? 
+                           <div className="team">
+                                {match.status === "FINISHED" ? 
                                 <div>
-                                    <div class="resultado">
+                                    <div className="resultado">
                                         Resultado: <br></br>
                                             {match.score.fullTime.home} - {match.score.fullTime.away}
                                         <br></br>
                                         Tu Pronostico:
-                                            {}
+                                            {pronosticosData.pronosticos.map(pronostico => {
+                                                return(<div>
+                                                        {match.id === pronostico.idPartido ? 
+                                                            <div>
+                                                                {pronostico.rlocal} - {pronostico.rvisitante}
+                                                            </div>
+                                                        : null}
+                                                    </div>)
+                                            })}
                                     </div>
                                 </div> : null
                                 }
                            </div> 
                             
-                           <div class="team">
-                                <img src={match.awayTeam.crest} class="teamCrest" alt={match.awayTeam.name} />
-                                <div class="teamName">{match.awayTeam.name}</div>
+                           <div className="team">
+                                <img src={match.awayTeam.crest} className="teamCrest" alt={match.awayTeam.name} />
+                                <div className="teamName">{match.awayTeam.name}</div>
                            </div> 
                         </div>
                         
