@@ -7,8 +7,6 @@ img.teamCrest{
 
 .team{
     text-align: center;
-    width: 150px;
-    padding: 2cm;
     width: 5cm;
     height: auto;
     display: inline-block;
@@ -18,12 +16,23 @@ img.teamCrest{
     padding-top: 40%;
 }
 
+.card{
+    margin-top: 20px;
+    text-align: center;
+}
+
 .matches{
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
-.match{
+#match{
     display: flex;
     justify-content: center;
+    width: 20cm;
+}
+
+#matchBody{
+    text-align: center;
 }

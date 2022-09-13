@@ -4,9 +4,8 @@
 
 .competition{
     text-align: center;
-    width: 150px;
     padding: 2cm;
-    width: 5cm;
+    width: 9cm;
     height: auto;
     display: inline-block;
   }
@@ -32,8 +31,8 @@ img.comppic{
 
 img.comppic:hover{
     cursor: pointer;
-    width: 175px;
-    height: 175px;
+    width: 150px;
+    height: 150px;
     padding: 0px;
     text-align: center;
     display: inline-block;

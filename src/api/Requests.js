@@ -6,22 +6,14 @@ const getToken = () => ({
     }
 })
 
-const getCompetitions = () => {
+export const getCompetitions = () => {
     return axios.get("http://localhost:8080/competitions", getToken())
 }
 
-const getMatches = (compId) => {
+export const getMatches = (compId) => {
     return axios.get(`http://localhost:8080/matches/${compId}`,getToken())
 }
 
-const getPronosticos = (user) => {
+export const getPredictions = (user) => {
     return axios.get(`http://localhost:8080/pronosticos/${user}`,getToken())
 }
-
-const exportedObject = {
-    getCompetitions,
-    getMatches,
-    getPronosticos
-}
-
-export default exportedObject;

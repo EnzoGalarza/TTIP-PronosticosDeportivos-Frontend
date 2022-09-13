@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css"
-import api from "../api/Requests"
+import { getCompetitions } from "../api/Requests"
 import Navbar from "./Navbar";
 
 const Home = () => {
@@ -13,7 +13,7 @@ const Home = () => {
     const navigate = useNavigate(); 
 
     const updateCompetitions = () => {
-        api.getCompetitions()
+        getCompetitions()
         .then((response) => {
             setCompetitionsData({
                 competitions: response.data
