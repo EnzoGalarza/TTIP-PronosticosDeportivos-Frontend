@@ -12,8 +12,12 @@ img.teamCrest{
     display: inline-block;
 }
 
-.resultado{
+.result{
     padding-top: 40%;
+}
+
+.prediction{
+    display: inline-block;
 }
 
 .card{
