@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const urlBASE = "http://localhost:8080"
+
 const getToken = () => ({
     headers: {
 
@@ -7,13 +9,13 @@ const getToken = () => ({
 })
 
 export const getCompetitions = () => {
-    return axios.get("http://localhost:8080/competitions", getToken())
+    return axios.get(`${urlBASE}/competitions`, getToken())
 }
 
 export const getMatches = (compId) => {
-    return axios.get(`http://localhost:8080/matches/${compId}`,getToken())
+    return axios.get(`${urlBASE}/matches/${compId}`,getToken())
 }
 
 export const getPredictions = (user) => {
-    return axios.get(`http://localhost:8080/pronosticos/${user}`,getToken())
+    return axios.get(`${urlBASE}/pronosticos/${user}`,getToken())
 }

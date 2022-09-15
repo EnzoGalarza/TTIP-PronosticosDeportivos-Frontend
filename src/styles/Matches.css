@@ -5,6 +5,11 @@ img.teamCrest{
     text-align: center;
 }
 
+.matches-page{
+    display: flex;
+    justify-content: center;
+}
+
 .team{
     text-align: center;
     width: 5cm;
