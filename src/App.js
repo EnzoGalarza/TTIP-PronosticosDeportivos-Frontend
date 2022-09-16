@@ -15,7 +15,7 @@ const App = () => {
             <Route element={<Login/>} path="/login"/>
           </Route>
           <Route element={<PrivateRoutes/>}>
-            <Route element={<Matches/>} path="/"/> {/*Esta ruta debe ser pública y debe llevar al login cuando esté la funcionalidad*/}
+            <Route element={<Home/>} path="/"/> {/*Esta ruta debe ser pública y debe llevar al login cuando esté la funcionalidad*/}
             <Route element={<Home/>} path="/home"/>
             <Route element={<Matches/>} path="/matches/:compId"/>
           </Route>
