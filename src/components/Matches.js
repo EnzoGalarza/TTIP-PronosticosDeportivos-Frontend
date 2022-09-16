@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getPredictions, getMatches } from "../api/Requests"
+import { getPredictions, getMatches, savePronostics } from "../api/Requests"
 import Navbar from "./Navbar";
 import "../styles/Matches.css"
 import { useParams } from 'react-router-dom';
@@ -9,8 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 const Matches = () => {
     const { compId } = useParams();
     const predictions = []
-
-    
 
     const [matchesData, setMatchesData] = useState({
         matches: []
@@ -95,7 +93,14 @@ const Matches = () => {
     }
 
     const savePredictions = () =>{
-
+        console.log("Predicciones a guardar o modificar : ", predictionsData)
+        savePronostics(predictionsData)
+            .then((response) =>{ 
+                console.log(response.data)}
+            )
+            .catch((error) =>{ 
+                console.log(error)}
+            )
     }
 
     useEffect(() => {

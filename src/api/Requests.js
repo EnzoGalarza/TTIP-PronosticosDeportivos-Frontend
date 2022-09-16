@@ -17,5 +17,13 @@ export const getMatches = (compId) => {
 }
 
 export const getPredictions = (user) => {
-    return axios.get(`${urlBASE}/pronosticos/${user}`,getToken())
+    return axios.get(`${urlBASE}/pronostics/${user}`,getToken())
 }
+
+export const savePronostics = (predictionList) => {
+    return axios.post(`${urlBASE}/pronostics`,predictionList)
+}
+
+/*export const updatePronostics = (predictionList) => {
+    return axios.put(`${urlBASE}/pronostics/update`,predictionList)
+}*/
