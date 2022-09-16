@@ -178,11 +178,12 @@ const Matches = () => {
                         )
                     })}
                 </div>
-                <div>
+                
+            </div>
+            <div>
                     <Button color="primary" id="saveBtn" type="button" className="btn" onClick={() => savePredictions()}>
                         Guardar pronósticos
                     </Button>
-                </div>
             </div>
         </>
         

@@ -17,6 +17,10 @@ img.teamCrest{
     display: inline-block;
 }
 
+.teamName{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
 .result{
     padding-top: 40%;
 }
