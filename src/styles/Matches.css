@@ -40,6 +40,20 @@ img.teamCrest{
     justify-content: center;
 }
 
+.localResInput{
+    width: 25mm;
+}
+
+.awayResInput{
+    width: 25mm;
+    margin-left: 10mm;
+}
+
+.goals{
+    width: 80mm;
+    display: inline-block;
+}
+
 #match{
     display: flex;
     justify-content: center;

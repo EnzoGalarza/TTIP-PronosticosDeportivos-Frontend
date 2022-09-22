@@ -12,8 +12,12 @@ export const getCompetitions = () => {
     return axios.get(`${urlBASE}/competitions`, getToken())
 }
 
-export const getMatches = (compId) => {
-    return axios.get(`${urlBASE}/matches/${compId}`,getToken())
+export const getCurrentMatchDay = (competitionId) => {
+    return axios.get(`${urlBASE}/currentMatchDay/${competitionId}`, getToken())
+}
+
+export const getMatches = (competitionId, matchDay) => {
+    return axios.get(`${urlBASE}/matches/${competitionId}/${matchDay}`,getToken())
 }
 
 export const getPredictions = (user) => {
@@ -23,7 +27,3 @@ export const getPredictions = (user) => {
 export const savePronostics = (predictionList) => {
     return axios.post(`${urlBASE}/pronostics`,predictionList)
 }
-
-/*export const updatePronostics = (predictionList) => {
-    return axios.put(`${urlBASE}/pronostics/update`,predictionList)
-}*/

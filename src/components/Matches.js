@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { getPredictions, getMatches, savePronostics } from "../api/Requests"
+import { getPredictions, getMatches, getCurrentMatchDay, savePronostics } from "../api/Requests"
 import Navbar from "./Navbar";
 import "../styles/Matches.css"
 import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import NumericInput from 'react-numeric-input';
+import Select from "react-select";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Matches = () => {
     const { compId } = useParams();
-    const predictions = []
+    const predictions = [];
+    const matchDayOptions = [] 
 
     const [matchesData, setMatchesData] = useState({
         matches: []
     })
+
+    const [matchDayOptionsData, setMatchDayOptionsData] = useState(matchDayOptions)
 
     const [predictionsData, setPredictionsData] = useState(predictions)
 
@@ -25,8 +30,8 @@ const Matches = () => {
         }).catch((error) => {console.log(error)})
     }
 
-    const updateMatches = () => {
-        getMatches(compId)
+    const updateMatches = (matchDay) => {
+        getMatches(compId, matchDay)
         .then((response) => {
             setMatchesData({
                 matches: response.data
@@ -34,62 +39,58 @@ const Matches = () => {
         })
         .catch((error) => {console.log(error)})
     }
+    
+    const updateMatchesData = () => {
+        getCurrentMatchDay(compId)
+        .then((response) => {
+            updateMatchDayOptions(response.data)
+            updateMatches(response.data);
+        })
+        .catch((error) => {console.log(error)})
+    }
 
-    const updateLocalPredictions = (prediction, team, calc) => {
+    const updatePredictionGoals = (prediction, team, goals) => {
         setPredictionsData(current => current.map(predic =>{
             if(predic.matchId === prediction.matchId){
                 if(team === "L"){
-                    if(calc === "+"){
-                        return {...predic, localGoals: predic.localGoals+1}
-                    }
-                    if(predic.localGoals > 0){
-                        return {...predic, localGoals: predic.localGoals-1}
-                    }
+                    return {...predic, localGoals: goals}
                 }
                 if(team === "A"){
-                    if(calc === "+"){
-                        return {...predic, awayGoals: predic.awayGoals+1}
-                    }
-                    if(predic.awayGoals > 0){
-                        return {...predic, awayGoals: predic.awayGoals-1}
-                    }
+                    return {...predic, awayGoals: goals}
                 }
             }    
             return predic
         }))
     }
 
-    const updateGoal = (id, team, calc) => {
-        const prediction =  predictionsData.find((p) => {
+    const updateGoal = (id, team, goals) => {
+        console.log("Goles " + goals)
+        var prediction =  predictionsData.find((p) => {
                                 return p.matchId === id;
                             })
 
         if(!prediction){
-            const newPrediction = {
+            prediction = {
                 user: "pedro",
                 matchId: id,
                 localGoals: 0,
                 awayGoals: 0,
             }
-            setPredictionsData(current => [...current, newPrediction])
-            return
+            setPredictionsData(current => [...current, prediction])
         }
-        updateLocalPredictions(prediction, team, calc)
+        updatePredictionGoals(prediction, team, goals)
         console.log(predictionsData)
         
     }
 
-    const getPredictionGoals = (id, team) =>{
-        const prediction =  predictionsData.find((p) => {
-            return p.matchId === id;
-        })
-        if(prediction){
-            if(team === "L"){
-                return prediction.localGoals
-            }
-            return prediction.awayGoals
+    const updateMatchDayOptions = (matchDay) =>{
+        while(matchDay > 0){
+            console.log(matchDay);
+            setMatchDayOptionsData(current => [...current, matchDay]);
+            matchDay = matchDay - 1;
         }
-        return "-"
+        console.log(matchDayOptionsData);
+        console.log(matchDayOptionsData.matchDayOptions)
     }
 
     const savePredictions = () =>{
@@ -104,7 +105,7 @@ const Matches = () => {
     }
 
     useEffect(() => {
-        updateMatches();
+        updateMatchesData();
         updatePredictions();
     },[compId]);
 
@@ -114,6 +115,7 @@ const Matches = () => {
                 <Navbar/>
             </header>
             <div class="matches-page">
+                
                 <div className="matches">
                     {matchesData.matches.map(match =>{
                         return(
@@ -128,7 +130,7 @@ const Matches = () => {
                                         <div className="teamName">{match.homeTeam.name}</div>
                                 </div>     
 
-                                <div className="team">
+                                <div className="goals">
                                         {match.status === "FINISHED" ? 
                                         <div className="result">
                                             Resultado: <br></br>
@@ -147,23 +149,18 @@ const Matches = () => {
                                         </div>
                                         : 
                                         <div className="prediction">
-                                            
-                                            <Button color="primary" id="localPlusBtn" type="button" className="btn" onClick={() => updateGoal(match.id, "L", "+")}>
-                                                +
-                                            </Button>
-                                            
-                                            <Button color="primary" id="awayPlusBtn" type="button" className="btn" onClick={() => updateGoal(match.id, "A", "+")}>
-                                                +
-                                            </Button>
-                                            <div className="predictionSeparator">
-                                            {getPredictionGoals(match.id, "L")} - {getPredictionGoals(match.id, "A")}
-                                            </div>
-                                            <Button color="primary" id="localMinusBtn" type="button" className="btn" onClick={() => updateGoal(match.id, "L", "-")}>
-                                                -
-                                            </Button>
-                                            <Button color="primary" id="awayMinusBtn" type="button" className="btn" onClick={() => updateGoal(match.id, "A", "-")}>
-                                                -
-                                            </Button>
+                                            <NumericInput 
+                                                      min={0} 
+                                                      className="localResInput"
+                                                      placeholder="Local"
+                                                      onChange={value => updateGoal(match.id, "L", value)}
+                                                      />
+                                            <NumericInput 
+                                                      min={0} 
+                                                      className="awayResInput"
+                                                      placeholder="Visitante"
+                                                      onChange={value => updateGoal(match.id, "A", value)}
+                                                      />
                                         </div>
                                         }
                                 </div> 
@@ -181,7 +178,7 @@ const Matches = () => {
                 
             </div>
             <div>
-                    <Button color="primary" id="saveBtn" type="button" className="btn" onClick={() => savePredictions()}>
+                    <Button color="primary" id="saveBtn" type="button" className="savePredictionsBtn" onClick={() => savePredictions()}>
                         Guardar pronósticos
                     </Button>
             </div>
