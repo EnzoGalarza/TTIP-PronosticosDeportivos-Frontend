@@ -11,13 +11,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 const Matches = () => {
     const { compId } = useParams();
     const predictions = [];
-    const matchDayOptions = [] 
 
     const [matchesData, setMatchesData] = useState({
         matches: []
     })
 
-    const [matchDayOptionsData, setMatchDayOptionsData] = useState(matchDayOptions)
+    const [matchDayOptionsData, setMatchDayOptionsData] = useState({
+        matchDayOptions: []
+    })
 
     const [predictionsData, setPredictionsData] = useState(predictions)
 
@@ -28,7 +29,7 @@ const Matches = () => {
                 response.data
             )
         }).catch((error) => {console.log(error)})
-    }
+    };
 
     const updateMatches = (matchDay) => {
         getMatches(compId, matchDay)
@@ -38,7 +39,7 @@ const Matches = () => {
             })
         })
         .catch((error) => {console.log(error)})
-    }
+    };
     
     const updateMatchesData = () => {
         getCurrentMatchDay(compId)
@@ -47,7 +48,7 @@ const Matches = () => {
             updateMatches(response.data);
         })
         .catch((error) => {console.log(error)})
-    }
+    };
 
     const updatePredictionGoals = (prediction, team, goals) => {
         setPredictionsData(current => current.map(predic =>{
@@ -61,7 +62,7 @@ const Matches = () => {
             }    
             return predic
         }))
-    }
+    };
 
     const updateGoal = (id, team, goals) => {
         console.log("Goles " + goals)
@@ -81,17 +82,25 @@ const Matches = () => {
         updatePredictionGoals(prediction, team, goals)
         console.log(predictionsData)
         
-    }
+    };
 
-    const updateMatchDayOptions = (matchDay) =>{
+    const updateMatchDayOptions = (matchDay) => {
+        var matchDays = []
+        var newMatchDay
         while(matchDay > 0){
-            console.log(matchDay);
-            setMatchDayOptionsData(current => [...current, matchDay]);
+            newMatchDay = {
+                value: matchDay, 
+                label: `Fecha ${matchDay}`
+            }
             matchDay = matchDay - 1;
+            matchDays.push(newMatchDay)
         }
-        console.log(matchDayOptionsData);
+        console.log(matchDays);
+        setMatchDayOptionsData({
+            matchDayOptions: matchDays
+        })
         console.log(matchDayOptionsData.matchDayOptions)
-    }
+    };
 
     const savePredictions = () =>{
         console.log("Predicciones a guardar o modificar : ", predictionsData)
@@ -102,12 +111,16 @@ const Matches = () => {
             .catch((error) =>{ 
                 console.log(error)}
             )
-    }
+    };
+
+    const handleSelectionChange = (event) => {
+        updateMatches(event.value)
+    };
 
     useEffect(() => {
         updateMatchesData();
         updatePredictions();
-    },[compId]);
+    },[]);
 
     return (
         <>  
@@ -115,7 +128,21 @@ const Matches = () => {
                 <Navbar/>
             </header>
             <div class="matches-page">
-                
+                <div className="matchDaySelection">
+                    <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        defaultValue={matchDayOptionsData.matchDayOptions[0]}
+                        isDisabled={false}
+                        isLoading={false}
+                        isClearable={false}
+                        isRtl={false}
+                        isSercheable={true}
+                        name="Fecha"
+                        options={matchDayOptionsData.matchDayOptions}
+                        onChange={handleSelectionChange}
+                    />
+                </div>
                 <div className="matches">
                     {matchesData.matches.map(match =>{
                         return(
