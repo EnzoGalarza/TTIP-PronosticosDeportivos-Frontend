@@ -179,7 +179,7 @@ const Matches = () => {
                                             {getPredictionGoals(match.id, "L") !== null &&
                                              getPredictionGoals(match.id, "A") !== null ?
                                                 <div>
-                                                    Tu Pronostico:
+                                                    Tu Pronóstico: <br></br>
                                                     {getPredictionGoals(match.id, "L")} - {getPredictionGoals(match.id, "A")}
                                                 </div>
                                                 : 
