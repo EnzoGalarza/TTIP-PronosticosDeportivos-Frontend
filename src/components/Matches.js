@@ -176,7 +176,17 @@ const Matches = () => {
                                             Resultado: <br></br>
                                             {match.score.fullTime.home} - {match.score.fullTime.away}
                                             <br></br>
-                                            {predictionsData.map(prediction => {
+                                            {getPredictionGoals(match.id, "L") !== null &&
+                                             getPredictionGoals(match.id, "A") !== null ?
+                                                <div>
+                                                    Tu Pronostico:
+                                                    {getPredictionGoals(match.id, "L")} - {getPredictionGoals(match.id, "A")}
+                                                </div>
+                                                : 
+                                                <div>
+                                                    Sin pronosticar
+                                                </div>
+                                            /*predictionsData.map(prediction => {
                                                 return(<div>
                                                         {match.id === prediction.matchId ? 
                                                             <div>
@@ -185,7 +195,7 @@ const Matches = () => {
                                                             </div>
                                                         : null}
                                                     </div>)
-                                            })}
+                                            })*/}
                                         </div>
                                         : 
                                         <div className="prediction">
