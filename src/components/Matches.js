@@ -113,6 +113,19 @@ const Matches = () => {
             )
     };
 
+    const getPredictionGoals = (id, team) =>{
+        const prediction =  predictionsData.find((p) => {
+            return p.matchId === id;
+        })
+        if(prediction){
+            if(team === "L"){
+                return prediction.localGoals
+            }
+            return prediction.awayGoals
+        }
+        return null
+    }
+
     const handleSelectionChange = (event) => {
         updateMatches(event.value)
     };
@@ -128,22 +141,22 @@ const Matches = () => {
                 <Navbar/>
             </header>
             <div class="matches-page">
-                <div className="matchDaySelection">
-                    <Select
-                        className="basic-single"
-                        classNamePrefix="select"
-                        defaultValue={matchDayOptionsData.matchDayOptions[0]}
-                        isDisabled={false}
-                        isLoading={false}
-                        isClearable={false}
-                        isRtl={false}
-                        isSercheable={true}
-                        name="Fecha"
-                        options={matchDayOptionsData.matchDayOptions}
-                        onChange={handleSelectionChange}
-                    />
-                </div>
                 <div className="matches">
+                    <div className="matchDaySelection">
+                        <Select
+                            className="basic-single"
+                            classNamePrefix="select"
+                            defaultValue={matchDayOptionsData.matchDayOptions[0]}
+                            isDisabled={false}
+                            isLoading={false}
+                            isClearable={false}
+                            isRtl={false}
+                            isSercheable={true}
+                            name="Fecha"
+                            options={matchDayOptionsData.matchDayOptions}
+                            onChange={handleSelectionChange}
+                        />
+                    </div>
                     {matchesData.matches.map(match =>{
                         return(
                         <div id= "match" className="card">
@@ -178,12 +191,14 @@ const Matches = () => {
                                         <div className="prediction">
                                             <NumericInput 
                                                       min={0} 
+                                                      value={getPredictionGoals(match.id, "L")}
                                                       className="localResInput"
                                                       placeholder="Local"
                                                       onChange={value => updateGoal(match.id, "L", value)}
                                                       />
                                             <NumericInput 
-                                                      min={0} 
+                                                      min={0}
+                                                      value={getPredictionGoals(match.id, "A")}
                                                       className="awayResInput"
                                                       placeholder="Visitante"
                                                       onChange={value => updateGoal(match.id, "A", value)}
