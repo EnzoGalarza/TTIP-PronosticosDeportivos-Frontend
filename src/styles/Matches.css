@@ -54,6 +54,10 @@ img.teamCrest{
     display: inline-block;
 }
 
+.savePredictionsBtn{
+    position: fixed;
+}
+
 #match{
     display: flex;
     justify-content: center;

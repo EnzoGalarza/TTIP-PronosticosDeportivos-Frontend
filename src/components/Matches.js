@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import NumericInput from 'react-numeric-input';
 import Select from "react-select";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { Nav } from "react-bootstrap";
 
 const Matches = () => {
     const { compId } = useParams();
@@ -135,6 +136,8 @@ const Matches = () => {
         updatePredictions();
     },[]);
 
+    const button = document.getElementById("saveBtn")
+
     return (
         <>  
             <header>
@@ -161,7 +164,7 @@ const Matches = () => {
                         return(
                         <div id= "match" className="card">
                             <div className="card-header">
-                                    {match.status === "SCHEDULED" ? match.utcDate : match.status}
+                                    {match.status === "SCHEDULED" || match.status === "TIMED" ? match.localDate : match.status}
                             </div> 
 
                             <div id= "matchBody" className="card-body">
@@ -224,16 +227,18 @@ const Matches = () => {
                             </div>
                         </div>
                         
+                        
                         )
                     })}
+                    
                 </div>
-                
-            </div>
-            <div>
+                <nav>
                     <Button color="primary" id="saveBtn" type="button" className="savePredictionsBtn" onClick={() => savePredictions()}>
                         Guardar pronósticos
                     </Button>
+                </nav>
             </div>
+            
         </>
         
     )
