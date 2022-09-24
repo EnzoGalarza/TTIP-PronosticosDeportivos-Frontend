@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./components/Login";
 import Matches from "./components/Matches";
 import Home from "./components/Home";
+import Register from "./components/Register";
 import PublicRoutes from "./components/PublicRoutes";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import PrivateRoutes from "./components/PrivateRoutes";
@@ -15,7 +16,8 @@ const App = () => {
             <Route element={<Login/>} path="/login"/>
           </Route>
           <Route element={<PrivateRoutes/>}>
-            <Route element={<Home/>} path="/"/> {/*Esta ruta debe ser pública y debe llevar al login cuando esté la funcionalidad*/}
+            <Route element={<Register/>} path="/register"/> {/*Esta ruta es pública*/}
+            <Route element={<Login/>} path="/"/>  {/*Esta ruta es pública*/}
             <Route element={<Home/>} path="/home"/>
             <Route element={<Matches/>} path="/matches/:compId"/>
           </Route>

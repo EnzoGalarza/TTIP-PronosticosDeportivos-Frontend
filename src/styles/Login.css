@@ -1,0 +1,29 @@
+.Login-main {
+    text-align: center;
+    background-color: #02022c;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(5px + 2vmin);
+    color: whitesmoke;
+}
+
+.input {
+    margin: 10px;
+}
+
+#LoginTitle {
+    font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
+    font-style: italic;
+    font-size: calc(20px + 2vmin);
+}
+
+#LoginBtn {
+    margin: 10px;
+}
+
+#alertLogin {
+    margin: 10px;
+}

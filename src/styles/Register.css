@@ -1,0 +1,32 @@
+.Register-main {
+    text-align: center;
+    background-color:#02022c;
+    min-height: 100vh;
+    font-size: calc(5px + 2vmin);
+    color: whitesmoke;
+}
+
+.registerInput {
+    margin: 10px;
+    display: block;
+    margin-left: 43%;
+}
+
+#RegisterTitle{
+    padding-top: 7%;
+    font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
+    font-style: italic;
+    font-size: calc(20px + 2vmin);
+}
+
+#RegisterImageInput{
+    margin-right: 3cm;
+}
+
+#ProfilePicture{
+    margin-right: 20%;
+    height: 4cm;
+    width: 4cm;
+    float: right;
+    border-radius: 15px;
+}
