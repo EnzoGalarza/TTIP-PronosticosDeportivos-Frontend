@@ -4,11 +4,12 @@ const urlBASE = "http://localhost:8080"
 
 const getToken = () => ({
     headers: {
-
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
     }
 })
 
 export const getCompetitions = () => {
+    console.log(getToken())
     return axios.get(`${urlBASE}/competitions`, getToken())
 }
 
@@ -25,5 +26,13 @@ export const getPredictions = (user) => {
 }
 
 export const savePronostics = (predictionList) => {
-    return axios.post(`${urlBASE}/pronostics`,predictionList)
+    return axios.post(`${urlBASE}/pronostics`,predictionList,getToken())
+}
+
+export const registerUser = (data) => {
+    return axios.post(`${urlBASE}/register`, data)
+}
+
+export const login = (data) =>{
+    return axios.post(`${urlBASE}/login`,data)
 }

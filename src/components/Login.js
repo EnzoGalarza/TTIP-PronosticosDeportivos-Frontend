@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from "react";
+import { login } from "../api/Requests"
 import { useNavigate } from "react-router-dom";
 import '../styles/Login.css';
 import $ from "jquery";
@@ -9,7 +10,7 @@ const Login = () => {
     const navigate = useNavigate(); 
 
     const [data, setData] = useState({
-        email: "",
+        username: "",
         password: "",
     });
 
@@ -28,7 +29,22 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate("/home");
+        login(data)
+            .then((response) => {
+                localStorage.setItem("token", response.headers.authentication);
+                navigate("/home");
+            })
+            .catch((error) => {
+                if(error.response){
+                    setError(error.response.data.message)
+                }
+                else {
+                    setError("Usuario o contraseña incorrectos")
+                }
+                $('#alertLogin').fadeTo(2000, 500).slideUp(500, () => {
+                    $('#alertLogin').slideUp(500)
+                })
+            });
     };
 
     return(
@@ -42,11 +58,11 @@ const Login = () => {
                 </h1>
                 <input 
                     id="LoginUserInput" 
-                    name="email"
+                    name="username"
                     className="input" 
                     type="text"
                     placeholder="E-mail" 
-                    value={data.email} 
+                    value={data.username} 
                     onChange={handleInputChange}
                 />
                 <input 
