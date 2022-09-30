@@ -13,11 +13,11 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<PublicRoutes/>}>
+            <Route element={<Login/>} path="/"/>
+            <Route element={<Register/>} path="/register"/>
             <Route element={<Login/>} path="/login"/>
           </Route>
           <Route element={<PrivateRoutes/>}>
-            <Route element={<Register/>} path="/register"/> {/*Esta ruta es pública*/}
-            <Route element={<Login/>} path="/"/>  {/*Esta ruta es pública*/}
             <Route element={<Home/>} path="/home"/>
             <Route element={<Matches/>} path="/matches/:compId"/>
           </Route>

@@ -16,6 +16,13 @@ const Navbar = () => {
         navigate("/register");
     }
 
+    const logout = () => {
+        localStorage.removeItem("token")
+        navigate("/")
+    }
+
+    const isAuthenticated = !!localStorage.getItem("token")
+
     return (
         <nav className="Navbar">
             <div className="text-right">
@@ -29,12 +36,17 @@ const Navbar = () => {
             {(location.pathname === "/" || location.pathname === "/login") && (
                 <>
                     <span id="RegisterTxt">
-                        No tenés tu cuenta aún?
+                        ¿No tenés tu cuenta aún?
                     </span>
                     <button id="RegisterBtn" type="button" className="btn btn-link" onClick={register}>
                         Registrarme
                     </button>
                 </>
+            )}
+            {isAuthenticated && (
+                <button id="LogoutBtn" type="button" className="btn btn-primary" onClick={logout}>
+                    Logout
+                </button>
             )}
         </nav>
     );

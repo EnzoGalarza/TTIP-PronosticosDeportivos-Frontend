@@ -1,5 +1,6 @@
 import '../styles/Register.css';
 import React, { useState, useEffect} from "react";
+import { registerUser } from "../api/Requests"
 import { useNavigate } from "react-router-dom";
 import $ from "jquery";
 import Navbar from "./Navbar";
@@ -11,7 +12,7 @@ const RegisterUser = () => {
         $('#alertReg').hide()
       }, []);
 
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const [data, setData] = useState({
         name: "",
@@ -19,11 +20,6 @@ const RegisterUser = () => {
         password: "",
         image: genericprofile
     });
-
-    const [loginData, setLoginData] = useState({
-        email: "",
-        password: ""
-    })
 
     const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -48,16 +44,26 @@ const RegisterUser = () => {
     };
 
     useEffect(() => {
-        setLoginData({
-            email : data.email,
-            password : data.password
-        })
-    },[data.email, data.password]);
+    },[]);
     
     const handleSubmit = (event) => {
         event.preventDefault();
         if(data.password === confirmPassword){
-            //Registrar usuario y logearlo.
+            registerUser(data)
+            .then(() => {
+                navigate("/login")
+            })
+            .catch((error) => {
+                if(error.response){
+                    setError(error.response.data.message)
+                }
+                else {
+                    setError("Not found")
+                }
+                $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
+                    $('#alertReg').slideUp(500)
+                })
+            });
         } else {
             setError("Las contraseñas no coinciden")
             $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
