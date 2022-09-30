@@ -53,7 +53,7 @@ const Matches = () => {
 
     const updatePredictionGoals = (prediction, team, goals) => {
         setPredictionsData(current => current.map(predic =>{
-            if(predic.matchId === prediction.matchId){
+            if(predic.match.code === prediction.match.code){
                 if(team === "L"){
                     return {...predic, localGoals: goals}
                 }
@@ -65,16 +65,28 @@ const Matches = () => {
         }))
     };
 
-    const updateGoal = (id, team, goals) => {
+    const updateGoal = (matchToSave, team, goals) => {
         console.log("Goles " + goals)
         var prediction =  predictionsData.find((p) => {
-                                return p.matchId === id;
+                                return p.match.code === matchToSave.id;
                             })
+
+                            console.log("El match que voy a guardar es: ", matchToSave)
 
         if(!prediction){
             prediction = {
                 user: "pedro",
-                matchId: id,
+                match: {
+                    homeTeam: matchToSave.homeTeam,
+                    awayTeam: matchToSave.awayTeam,
+                    date: matchToSave.utcDate,
+                    localGoals: matchToSave.score.fullTime.home,
+                    awayGoals: matchToSave.score.fullTime.away,
+                    code: matchToSave.id,
+                    status: matchToSave.status,
+                    matchDay: matchToSave.matchday,
+                    competition: compId
+                },
                 localGoals: 0,
                 awayGoals: 0,
             }
@@ -104,7 +116,7 @@ const Matches = () => {
     };
 
     const savePredictions = () =>{
-        console.log("Predicciones a guardar o modificar : ", predictionsData)
+        //console.log("Predicciones a guardar o modificar : ", predictionsData)
         savePronostics(predictionsData)
             .then((response) =>{ 
                 console.log(response.data)}
@@ -114,9 +126,9 @@ const Matches = () => {
             )
     };
 
-    const getPredictionGoals = (id, team) =>{
+    const getPredictionGoals = (code, team) =>{
         const prediction =  predictionsData.find((p) => {
-            return p.matchId === id;
+            return p.match.code === code;
         })
         if(prediction){
             if(team === "L"){
@@ -136,7 +148,6 @@ const Matches = () => {
         updatePredictions();
     },[]);
 
-    const button = document.getElementById("saveBtn")
 
     return (
         <>  
@@ -179,8 +190,8 @@ const Matches = () => {
                                             Resultado: <br></br>
                                             {match.score.fullTime.home} - {match.score.fullTime.away}
                                             <br></br>
-                                            {getPredictionGoals(match.id, "L") !== null &&
-                                             getPredictionGoals(match.id, "A") !== null ?
+                                            {getPredictionGoals(match.code, "L") !== null &&
+                                             getPredictionGoals(match.code, "A") !== null ?
                                                 <div>
                                                     Tu Pronóstico: <br></br>
                                                     {getPredictionGoals(match.id, "L")} - {getPredictionGoals(match.id, "A")}
@@ -207,14 +218,14 @@ const Matches = () => {
                                                       value={getPredictionGoals(match.id, "L")}
                                                       className="localResInput"
                                                       placeholder="Local"
-                                                      onChange={value => updateGoal(match.id, "L", value)}
+                                                      onChange={value => updateGoal(match, "L", value)}
                                                       />
                                             <NumericInput 
                                                       min={0}
                                                       value={getPredictionGoals(match.id, "A")}
                                                       className="awayResInput"
                                                       placeholder="Visitante"
-                                                      onChange={value => updateGoal(match.id, "A", value)}
+                                                      onChange={value => updateGoal(match, "A", value)}
                                                       />
                                         </div>
                                         }
