@@ -24,7 +24,7 @@ const Matches = () => {
     const [predictionsData, setPredictionsData] = useState(predictions)
 
     const updatePredictions = () => {
-        getPredictions("pedro")
+        getPredictions(localStorage.getItem("user"))
         .then((response) => {
             setPredictionsData(
                 response.data
@@ -75,7 +75,7 @@ const Matches = () => {
 
         if(!prediction){
             prediction = {
-                user: "pedro",
+                user: localStorage.getItem("user"),
                 match: {
                     homeTeam: matchToSave.homeTeam,
                     awayTeam: matchToSave.awayTeam,
