@@ -33,12 +33,12 @@ const Login = () => {
             .then((response) => {
                 localStorage.setItem("token", response.headers.authentication);
                 console.log("RESPONSE: ",response.data)
-                localStorage.setItem("user", response.data.name)
+                localStorage.setItem("user", response.data.username)
                 navigate("/home");
             })
             .catch((error) => {
                 if(error.response){
-                    setError(error.response.data.message)
+                    setError(error.response.data)
                 }
                 else {
                     setError("Usuario o contraseña incorrectos")

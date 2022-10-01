@@ -55,7 +55,7 @@ const RegisterUser = () => {
             })
             .catch((error) => {
                 if(error.response){
-                    setError(error.response.data.message)
+                    setError(error.response.data)
                 }
                 else {
                     setError("Not found")
