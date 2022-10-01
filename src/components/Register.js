@@ -87,7 +87,7 @@ const RegisterUser = () => {
                     name = "name"
                     className="registerInput" 
                     type="text"
-                    placeholder="User name"
+                    placeholder="Nombre de usuario"
                     value={data.name}
                     onChange={handleInputChange}
                 />
@@ -105,7 +105,7 @@ const RegisterUser = () => {
                     name="password"
                     className="registerInput" 
                     type="password" 
-                    placeholder="Password"
+                    placeholder="Contraseña"
                     value={data.password}
                     onChange={handleInputChange}    
                 />
@@ -114,7 +114,7 @@ const RegisterUser = () => {
                     name="confirmPassword"
                     className="registerInput" 
                     type="password" 
-                    placeholder="Confirm password"
+                    placeholder="Repetir contraseña"
                     value={confirmPassword}
                     onChange={handleConfirmPasswordChange}
                 />
