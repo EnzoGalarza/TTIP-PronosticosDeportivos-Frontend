@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button';
 import NumericInput from 'react-numeric-input';
 import Select from "react-select";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Nav } from "react-bootstrap";
 
 const Matches = () => {
     const { compId } = useParams();
@@ -54,10 +53,10 @@ const Matches = () => {
     const updatePredictionGoals = (prediction, team, goals) => {
         setPredictionsData(current => current.map(predic =>{
             if(predic.match.code === prediction.match.code){
-                if(team === "L"){
+                if(team === "HOME"){
                     return {...predic, localGoals: goals}
                 }
-                if(team === "A"){
+                if(team === "AWAY"){
                     return {...predic, awayGoals: goals}
                 }
             }    
@@ -67,14 +66,14 @@ const Matches = () => {
 
     const updateGoal = (matchToSave, team, goals) => {
         console.log("Goles " + goals)
-        var prediction =  predictionsData.find((p) => {
-                                return p.match.code === matchToSave.id;
+        var newPrediction =  predictionsData.find((prediction) => {
+                                return prediction.match.code === matchToSave.id;
                             })
 
                             console.log("El match que voy a guardar es: ", matchToSave)
 
-        if(!prediction){
-            prediction = {
+        if(!newPrediction){
+            newPrediction = {
                 user: localStorage.getItem("user"),
                 match: {
                     homeTeam: matchToSave.homeTeam,
@@ -90,9 +89,9 @@ const Matches = () => {
                 localGoals: 0,
                 awayGoals: 0,
             }
-            setPredictionsData(current => [...current, prediction])
+            setPredictionsData(current => [...current, newPrediction])
         }
-        updatePredictionGoals(prediction, team, goals)
+        updatePredictionGoals(newPrediction, team, goals)
         console.log(predictionsData)
         
     };
@@ -131,7 +130,7 @@ const Matches = () => {
             return p.match.code === code;
         })
         if(prediction){
-            if(team === "L"){
+            if(team === "HOME"){
                 return prediction.localGoals
             }
             return prediction.awayGoals
@@ -190,42 +189,33 @@ const Matches = () => {
                                             Resultado: <br></br>
                                             {match.score.fullTime.home} - {match.score.fullTime.away}
                                             <br></br>
-                                            {getPredictionGoals(match.code, "L") !== null &&
-                                             getPredictionGoals(match.code, "A") !== null ?
+                                            {getPredictionGoals(match.code, "HOME") !== null &&
+                                             getPredictionGoals(match.code, "AWAY") !== null ?
                                                 <div>
                                                     Tu Pronóstico: <br></br>
-                                                    {getPredictionGoals(match.id, "L")} - {getPredictionGoals(match.id, "A")}
+                                                    {getPredictionGoals(match.id, "HOME")} - {getPredictionGoals(match.id, "AWAY")}
                                                 </div>
                                                 : 
                                                 <div>
                                                     Sin pronosticar
                                                 </div>
-                                            /*predictionsData.map(prediction => {
-                                                return(<div>
-                                                        {match.id === prediction.matchId ? 
-                                                            <div>
-                                                                Tu Pronostico:
-                                                                {prediction.localGoals} - {prediction.awayGoals}
-                                                            </div>
-                                                        : null}
-                                                    </div>)
-                                            })*/}
+                                            }
                                         </div>
                                         : 
                                         <div className="prediction">
                                             <NumericInput 
                                                       min={0} 
-                                                      value={getPredictionGoals(match.id, "L")}
+                                                      value={getPredictionGoals(match.id, "HOME")}
                                                       className="localResInput"
                                                       placeholder="Local"
-                                                      onChange={value => updateGoal(match, "L", value)}
+                                                      onChange={value => updateGoal(match, "HOME", value)}
                                                       />
                                             <NumericInput 
                                                       min={0}
-                                                      value={getPredictionGoals(match.id, "A")}
+                                                      value={getPredictionGoals(match.id, "AWAY")}
                                                       className="awayResInput"
                                                       placeholder="Visitante"
-                                                      onChange={value => updateGoal(match, "A", value)}
+                                                      onChange={value => updateGoal(match, "AWAY", value)}
                                                       />
                                         </div>
                                         }
