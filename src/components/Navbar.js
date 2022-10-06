@@ -6,14 +6,13 @@ import logo from '../images/pd.png';
 const Navbar = () => {
 
     const navigate = useNavigate(); 
-    const location = useLocation();
 
     const home = () => {
         navigate("/home");
     }
 
-    const register = () => {
-        navigate("/register");
+    const profile = () => {
+        navigate("/profile");
     }
 
     const logout = () => {
@@ -25,31 +24,24 @@ const Navbar = () => {
 
     return (
         <nav className="Navbar">
-            <div className="text-right">
-                <div className="userContainer">
-                    <img id="PDLogo" alt={"Not found"} src={logo} onClick={home}/>
-                </div>
-            </div>
-            <div className="navbarTitle">
-                Pronósticos deportivos
-            </div>
-            {(location.pathname === "/" || location.pathname === "/login") && (
-                <>
-                    <span id="RegisterTxt">
-                        ¿No tenés tu cuenta aún?
-                    </span>
-                    <button id="RegisterBtn" type="button" className="btn btn-link" onClick={register}>
-                        Registrarme
-                    </button>
-                </>
-            )}
             {isAuthenticated && (
-                <button id="LogoutBtn" type="button" className="btn btn-primary" onClick={logout}>
-                    Logout
+                <span className="profile">
+                    <img src={localStorage.getItem("profileImage")} className="profilePicture" alt={localStorage.getItem("user")} onClick={profile}/>
+                </span>
+            )}
+            <span className="logo">
+                <span className="userContainer">
+                    <img id="PDLogo" alt={"Pronósticos deportivos"} src={logo} onClick={home}/>
+                </span>
+            </span>
+            {isAuthenticated && (
+                <button id="LogoutBtn" type="button" className="btn btn-link" onClick={logout}>
+                    Cerrar sesión
                 </button>
             )}
         </nav>
     );
+
 
 };
 

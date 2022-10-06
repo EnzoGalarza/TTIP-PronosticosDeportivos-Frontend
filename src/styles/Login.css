@@ -14,6 +14,12 @@
     margin: 10px;
 }
 
+.register {
+    background-color: #02022c;
+    color: whitesmoke;
+    text-align-last: end;
+}
+
 #LoginTitle {
     font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
     font-style: italic;

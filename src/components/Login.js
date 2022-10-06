@@ -23,6 +23,10 @@ const Login = () => {
         });
     };
 
+    const register = () => {
+        navigate("/register");
+    }
+
     useEffect(() => {
         $('#alertLogin').hide()
       }, []);
@@ -32,8 +36,8 @@ const Login = () => {
         login(data)
             .then((response) => {
                 localStorage.setItem("token", response.headers.authentication);
-                console.log("RESPONSE: ",response.data)
                 localStorage.setItem("user", response.data.username)
+                localStorage.setItem("profileImage", response.data.profileImage)
                 navigate("/home");
             })
             .catch((error) => {
@@ -54,6 +58,14 @@ const Login = () => {
             <header>
                 <Navbar />
             </header>
+            <div className="register">
+                <span id="RegisterTxt">
+                    ¿No tenés tu cuenta aún?
+                </span>
+                <button id="RegisterBtn" type="button" className="btn btn-link" onClick={register}>
+                    Registrarme
+                </button>
+            </div>
             <form className="Login-main" onSubmit={handleSubmit}>
                 <h1 id="LoginTitle">
                     Ingresá

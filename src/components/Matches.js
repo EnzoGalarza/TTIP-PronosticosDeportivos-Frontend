@@ -116,7 +116,6 @@ const Matches = () => {
     };
 
     const savePredictions = () =>{
-        //console.log("Predicciones a guardar o modificar : ", predictionsData)
         savePronostics(predictionsData)
             .then((response) =>{ 
                 console.log(response.data)}
