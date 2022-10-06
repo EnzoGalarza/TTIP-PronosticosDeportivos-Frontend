@@ -19,8 +19,26 @@
     font-size: calc(20px + 2vmin);
 }
 
+#RegisterNameInput{
+    padding: 5px;
+}
+
+#RegisterEmailInput{
+    padding: 5px;
+}
+
+#RegisterPassInput{
+    padding: 5px;
+}
+
+#RegisterConfirmPassInput{
+    padding: 5px;
+}
+
 #RegisterImageInput{
     margin-right: 3cm;
+    padding: 5px;
+    cursor: pointer;
 }
 
 #ProfilePicture{

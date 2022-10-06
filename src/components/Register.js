@@ -33,10 +33,18 @@ const RegisterUser = () => {
     };
 
     const handleImageInputChange = (event) => {
-        setData({
-            ...data,
-            image: URL.createObjectURL(event.target.files[0])
-        });
+        if(event.target.files.length > 0){
+            setData({
+                ...data,
+                image: URL.createObjectURL(event.target.files[0])
+            });
+        }
+        else{
+            setData({
+                ...data,
+                image: genericprofile
+            });
+        }
     };
 
     const handleConfirmPasswordChange = (event) => {
