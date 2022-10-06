@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getPredictions, getMatches, getCurrentMatchDay, savePronostics } from "../api/Requests"
+import Match from "./Match";
 import Navbar from "./Navbar";
 import "../styles/Matches.css"
 import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import NumericInput from 'react-numeric-input';
 import Select from "react-select";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -50,6 +50,12 @@ const Matches = () => {
         .catch((error) => {console.log(error)})
     };
 
+    const findPrediction = (code) => {
+        return predictionsData.find((prediction) => {
+            return prediction.match.code === code;
+        });
+    };
+
     const updatePredictionGoals = (prediction, team, goals) => {
         setPredictionsData(current => current.map(predic =>{
             if(predic.match.code === prediction.match.code){
@@ -66,11 +72,7 @@ const Matches = () => {
 
     const updateGoal = (matchToSave, team, goals) => {
         console.log("Goles " + goals)
-        var newPrediction =  predictionsData.find((prediction) => {
-                                return prediction.match.code === matchToSave.id;
-                            })
-
-                            console.log("El match que voy a guardar es: ", matchToSave)
+        var newPrediction =  findPrediction(matchToSave.id)
 
         if(!newPrediction){
             newPrediction = {
@@ -93,7 +95,6 @@ const Matches = () => {
         }
         updatePredictionGoals(newPrediction, team, goals)
         console.log(predictionsData)
-        
     };
 
     const updateMatchDayOptions = (matchDay) => {
@@ -126,9 +127,7 @@ const Matches = () => {
     };
 
     const getPredictionGoals = (code, team) =>{
-        const prediction =  predictionsData.find((p) => {
-            return p.match.code === code;
-        })
+        const prediction =  findPrediction(code)
         if(prediction){
             if(team === "HOME"){
                 return prediction.localGoals
@@ -170,67 +169,7 @@ const Matches = () => {
                             onChange={handleSelectionChange}
                         />
                     </div>
-                    {matchesData.matches.map(match =>{
-                        return(
-                        <div id= "match" className="card">
-                            <div className="card-header">
-                                    {match.status === "SCHEDULED" || match.status === "TIMED" ? match.localDate : match.status}
-                            </div> 
-
-                            <div id= "matchBody" className="card-body">
-                                <div className="team"> 
-                                        <img src={match.homeTeam.crest} className="teamCrest" alt={match.homeTeam.name} />
-                                        <div className="teamName">{match.homeTeam.name}</div>
-                                </div>     
-
-                                <div className="goals">
-                                        {match.status === "FINISHED" ? 
-                                        <div className="result">
-                                            Resultado: <br></br>
-                                            {match.score.fullTime.home} - {match.score.fullTime.away}
-                                            <br></br>
-                                            {getPredictionGoals(match.code, "HOME") !== null &&
-                                             getPredictionGoals(match.code, "AWAY") !== null ?
-                                                <div>
-                                                    Tu Pronóstico: <br></br>
-                                                    {getPredictionGoals(match.id, "HOME")} - {getPredictionGoals(match.id, "AWAY")}
-                                                </div>
-                                                : 
-                                                <div>
-                                                    Sin pronosticar
-                                                </div>
-                                            }
-                                        </div>
-                                        : 
-                                        <div className="prediction">
-                                            <NumericInput 
-                                                      min={0} 
-                                                      value={getPredictionGoals(match.id, "HOME")}
-                                                      className="localResInput"
-                                                      placeholder="Local"
-                                                      onChange={value => updateGoal(match, "HOME", value)}
-                                                      />
-                                            <NumericInput 
-                                                      min={0}
-                                                      value={getPredictionGoals(match.id, "AWAY")}
-                                                      className="awayResInput"
-                                                      placeholder="Visitante"
-                                                      onChange={value => updateGoal(match, "AWAY", value)}
-                                                      />
-                                        </div>
-                                        }
-                                </div> 
-                                    
-                                <div className="team">
-                                        <img src={match.awayTeam.crest} className="teamCrest" alt={match.awayTeam.name} />
-                                        <div className="teamName">{match.awayTeam.name}</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        )
-                    })}
+                    {matchesData.matches.map(match => <Match match={match} getPredictionGoals={getPredictionGoals} updateGoal={updateGoal}/>)}
                     
                 </div>
                 <nav>
