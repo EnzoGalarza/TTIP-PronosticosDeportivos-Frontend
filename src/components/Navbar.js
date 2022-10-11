@@ -1,6 +1,7 @@
 import React from "react"
 import "../styles/Navbar.css"
-import { useNavigate, useLocation } from "react-router-dom";
+import Menu from "./Menu";
+import { useNavigate } from "react-router-dom";
 import logo from '../images/pd.png';
 
 const Navbar = () => {
@@ -13,11 +14,6 @@ const Navbar = () => {
 
     const profile = () => {
         navigate("/profile");
-    }
-
-    const logout = () => {
-        localStorage.removeItem("token")
-        navigate("/")
     }
 
     const isAuthenticated = !!localStorage.getItem("token")
@@ -35,9 +31,9 @@ const Navbar = () => {
                 </span>
             </span>
             {isAuthenticated && (
-                <button id="LogoutBtn" type="button" className="btn btn-link" onClick={logout}>
-                    Cerrar sesión
-                </button>
+                <span className="menu">
+                    <Menu/>
+                </span>
             )}
         </nav>
     );

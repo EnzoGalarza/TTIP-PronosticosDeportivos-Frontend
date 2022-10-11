@@ -15,14 +15,14 @@
     border-radius: 150px;
 }
 
+.menu {
+    padding: 12px;
+    float: right;
+}
+
 #PDLogo {
     width:25%;
     height: 75px;
     cursor: pointer
-}
-
-#LogoutBtn{
-    margin-top: 15px;
-    float: right;
 }
 
