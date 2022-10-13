@@ -3,10 +3,8 @@ import "../styles/Menu.css"
 import { useNavigate } from "react-router-dom";
 import {
   MDBContainer,
-  MDBCollapse,
   MDBNavbar,
   MDBNavbarToggler,
-  MDBBtn,
 } from 'mdb-react-ui-kit';
 
 

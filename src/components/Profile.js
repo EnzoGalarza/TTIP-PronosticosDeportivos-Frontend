@@ -9,7 +9,7 @@ const Profile = () => {
                 <Navbar/>
             </header>
             <div class="profile-page">
-                Mi perfil
+                
             </div>
             
         </>

@@ -1,12 +1,13 @@
 import React from "react"
 import "../styles/Navbar.css"
 import Menu from "./Menu";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import logo from '../images/pd.png';
 
 const Navbar = () => {
 
     const navigate = useNavigate(); 
+    const location = useLocation();
 
     const home = () => {
         navigate("/home");
@@ -22,7 +23,11 @@ const Navbar = () => {
         <nav className="Navbar">
             {isAuthenticated && (
                 <span className="profile">
-                    <img src={localStorage.getItem("profileImage")} className="profilePicture" alt={localStorage.getItem("user")} onClick={profile}/>
+                    <img src={localStorage.getItem("profileImage")} 
+                         className={`profilePicture ${location.pathname === "/profile" ? 'active' : ''}`}
+                         alt={localStorage.getItem("user")} 
+                         onClick={profile}
+                    />
                 </span>
             )}
             <span className="logo">
