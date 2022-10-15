@@ -46,6 +46,5 @@ export const updateTournamentsData = (user) => {
 }
 
 export const saveTournament = (data) =>{
-    console.log("Console data" , data)
     return axios.post(`${urlBASE}/tournaments`,data, getToken())
 }

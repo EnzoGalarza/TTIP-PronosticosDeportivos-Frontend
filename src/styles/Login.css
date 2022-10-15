@@ -42,3 +42,13 @@
 #alertLogin {
     margin: 10px;
 }
+
+.register{
+    font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
+    font-size: calc(3px + 2vmin);
+}
+
+#RegisterBtn{
+    font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
+    font-size: calc(3px + 2vmin);
+}

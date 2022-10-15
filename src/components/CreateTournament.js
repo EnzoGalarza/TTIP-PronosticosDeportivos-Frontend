@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { getCompetitions, getUsers, saveTournament } from "../api/Requests"
 import { useNavigate } from "react-router-dom";
-import "../styles/CreateTournament.css"
+import "../styles/CreateTournament.css";
 import Navbar from "./Navbar";
 
 const CreateTournament = () => {
@@ -32,6 +32,9 @@ const CreateTournament = () => {
         .then((response) => {
             setCompetitionsData({
                 competitions: response.data
+            });
+            setCompetitionPicture({
+                image: response.data[0].emblem
             })
         })
         .catch((error) => {console.log(error)})
@@ -55,15 +58,13 @@ const CreateTournament = () => {
     }
 
     const handleInputChange = (event) => {
-        console.log("target event: ",event.target)
         setDatos({
             ...datos,
             [event.target.name] : event.target.value
         })
         setCompetitionPicture({
-            image: event.target.image
+            image: document.querySelector(`option[value="${event.target.value}"]`).dataset.eventImage
         })
-        console.log("Picutre",competitionPicture)
     }
 
     const handleSubmit = (event) =>{
@@ -81,29 +82,32 @@ const CreateTournament = () => {
                 <Navbar />
             </header>
             <div className="container">
-            <form className="createTournament" onSubmit={handleSubmit}>
-                <h1 id="tournamentTitle">
-                    Crear Torneo
-                </h1>
-                <input 
-                    type="text" 
-                    placeholder="Nombre torneo" 
-                    id="nameInput"
-                    className="nameInput" 
-                    onChange={handleInputChange} 
-                    name="name">
-                </input>
-                <img id="competitionPicture" src={competitionPicture.image}/>
-                <select className="competitionInput" onChange={handleInputChange} name="competition">
-                    {competitionsData.competitions.map(competition => 
-                        <option key={competition.code} image={competition.emblem} value={competition.code}>
-                            {competition.name}
-                            </option>)}
-                </select>
-                <div className="createButton">        
-                    <button type="submit" className="btn btn-primary">Crear</button>
-                </div>    
-            </form>
+                <form className="createTournament" onSubmit={handleSubmit}>
+                    <h1 className="tournamentTitle">
+                        Nuevo torneo
+                    </h1>
+                    <span className="pictureContainer">
+                        <img className="competitionPicture" id="CompetitionPicture" src={competitionPicture.image}/>
+                    </span>
+                    <input 
+                        type="text" 
+                        placeholder="Nombre" 
+                        id="nameInput"
+                        className="nameInput" 
+                        onChange={handleInputChange} 
+                        name="name">
+                    </input>
+                    <select className="competitionInput" onChange={handleInputChange} name="competition">
+                        {competitionsData.competitions.map(competition => 
+                            <option key={competition.code} data-event-image={competition.emblem} value={competition.code}>
+                                {competition.name}
+                            </option>)
+                        }
+                    </select>
+                    <div className="createButton">        
+                        <button type="submit" className="btn btn-primary">Crear</button>
+                    </div> 
+                </form>
             </div>
         </>    
     )

@@ -16,7 +16,6 @@
 .nameInput {
     margin-top: 15px;
     display: block;
-    align-content: center;
     padding: 5px;
     width: 250px;
 }
@@ -35,4 +34,15 @@
 
 .input-group-text{
     width: 100px
+}
+
+.pictureContainer{
+    display: inline;
+    float: right;
+    padding: 20px;
+}
+
+.competitionPicture{
+    width: 150px;
+    height: 150px;
 }

@@ -1,6 +1,7 @@
 import "../styles/Matches.css"
 import NumericInput from 'react-numeric-input'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Team from "./Team";
 
 
 function Match({match, getPredictionGoals, updateGoal}){
@@ -12,11 +13,7 @@ function Match({match, getPredictionGoals, updateGoal}){
             </div> 
 
             <div id= "matchBody" className="card-body">
-                <div className="team"> 
-                        <img src={match.homeTeam.crest} className="teamCrest" alt={match.homeTeam.name} />
-                        <div className="teamName">{match.homeTeam.name}</div>
-                </div>     
-
+                <Team name={match.awayTeam.name} crest={match.awayTeam.crest}/>    
                 <div className="goals">
                         {match.status === "FINISHED" ? 
                         <div className="result">
@@ -54,11 +51,7 @@ function Match({match, getPredictionGoals, updateGoal}){
                         </div>
                         }
                 </div> 
-                    
-                <div className="team">
-                        <img src={match.awayTeam.crest} className="teamCrest" alt={match.awayTeam.name} />
-                        <div className="teamName">{match.awayTeam.name}</div>
-                </div>
+                <Team name={match.awayTeam.name} crest={match.awayTeam.crest}/> 
             </div>
         </div>
         
