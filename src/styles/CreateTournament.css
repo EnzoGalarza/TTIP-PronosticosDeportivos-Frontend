@@ -1,0 +1,38 @@
+
+
+.tournamentTitle {
+    padding-top: 7%;
+    font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
+    font-style: italic;
+    font-size: calc(20px + 2vmin);
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.nameInput {
+    margin-top: 15px;
+    display: block;
+    align-content: center;
+    padding: 5px;
+    width: 250px;
+}
+
+.competitionInput {
+    padding: 5px;
+    margin-top: 15px;
+    width: 250px;
+}
+
+.createButton {
+    padding: 5px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.input-group-text{
+    width: 100px
+}

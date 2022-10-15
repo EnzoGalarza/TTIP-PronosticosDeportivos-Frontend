@@ -7,6 +7,8 @@ import Profile from "./components/Profile";
 import PublicRoutes from "./components/PublicRoutes";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import PrivateRoutes from "./components/PrivateRoutes";
+import CreateTournament from "./components/CreateTournament";
+import Tournaments from "./components/Tournaments";
 
 const App = () => {
   return (
@@ -21,6 +23,8 @@ const App = () => {
           <Route element={<PrivateRoutes/>}>
             <Route element={<Home/>} path="/home"/>
             <Route element={<Profile/>} path="/profile"/>
+            <Route element={<CreateTournament/>} path="/tournament/create"/>
+            <Route element={<Tournaments/>} path="/tournaments"/>
             <Route element={<Matches/>} path="/matches/:compId"/>
           </Route>
         </Routes>

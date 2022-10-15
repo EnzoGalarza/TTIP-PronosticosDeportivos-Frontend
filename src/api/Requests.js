@@ -36,3 +36,16 @@ export const registerUser = (data) => {
 export const login = (data) =>{
     return axios.post(`${urlBASE}/login`,data)
 }
+
+export const getUsers = () =>{
+    return axios.get(`${urlBASE}/users`)
+}
+
+export const updateTournamentsData = (user) => {
+    return axios.get(`${urlBASE}/tournaments/${user}`,getToken())
+}
+
+export const saveTournament = (data) =>{
+    console.log("Console data" , data)
+    return axios.post(`${urlBASE}/tournaments`,data, getToken())
+}

@@ -9,12 +9,20 @@ import {
 
 
 function Menu(){
-    {
+    
         const [showAnimated, setShowAnimated] = useState(false);
 
         const logout = () => {
             localStorage.removeItem("token")
             navigate("/")
+        }
+
+        const createTournament = () => {
+            navigate("/tournament/create")
+        }
+
+        const goToTournaments = () => {
+            navigate("/tournaments")
         }
 
         const navigate = useNavigate(); 
@@ -43,10 +51,10 @@ function Menu(){
                     </MDBNavbar>
                     <div className={`menuItems ${showAnimated ? 'active' : ''}`}/>
                     <div className={`itemButtons ${showAnimated ? 'active' : ''}`}>
-                        <div id="ItemButton" type="button" className="itemButton">
+                        <div id="ItemButton" type="button" className="itemButton" onClick={createTournament}>
                             Crear torneo
                         </div>
-                        <div id="ItemButton" type="button" className="itemButton">
+                        <div id="ItemButton" type="button" className="itemButton" onClick={goToTournaments}>
                             Mis torneos
                         </div>
                         <div id="ItemButton" type="button" className="itemButton" onClick={logout}>
@@ -56,7 +64,7 @@ function Menu(){
                 </section>
             </>
         )
-    }
 }
+
 
 export default Menu
