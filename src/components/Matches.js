@@ -23,8 +23,9 @@ const Matches = () => {
     const [predictionsData, setPredictionsData] = useState(predictions)
 
     const updatePredictions = () => {
-        getPredictions(localStorage.getItem("user"))
+        getPredictions(localStorage.getItem("user"),compId)
         .then((response) => {
+            console.log("Reponse predictions : ", response)
             setPredictionsData(
                 response.data
             )

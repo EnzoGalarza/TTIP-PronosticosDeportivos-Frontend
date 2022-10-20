@@ -9,6 +9,7 @@ const CreateTournament = () => {
     const [datos, setDatos] = useState({
         name: '',
         competition: '',
+        creator: localStorage.getItem("user"),
         usersEmail: [localStorage.getItem("user")]
     })
 

@@ -13,15 +13,15 @@ function Match({match, getPredictionGoals, updateGoal}){
             </div> 
 
             <div id= "matchBody" className="card-body">
-                <Team name={match.awayTeam.name} crest={match.awayTeam.crest}/>    
+                <Team name={match.homeTeam.name} crest={match.homeTeam.crest}/>    
                 <div className="goals">
                         {match.status === "FINISHED" ? 
                         <div className="result">
                             Resultado: <br></br>
                             {match.score.fullTime.home} - {match.score.fullTime.away}
                             <br></br>
-                            {getPredictionGoals(match.code, "HOME") !== null &&
-                             getPredictionGoals(match.code, "AWAY") !== null ?
+                            {getPredictionGoals(match.id, "HOME") !== null &&
+                             getPredictionGoals(match.id, "AWAY") !== null ?
                                 <div>
                                     Tu Pronóstico: <br></br>
                                     {getPredictionGoals(match.id, "HOME")} - {getPredictionGoals(match.id, "AWAY")}

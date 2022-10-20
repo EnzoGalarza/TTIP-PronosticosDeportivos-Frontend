@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { updateTournamentsData } from "../api/Requests"
+import { updateTournamentsData, updateScoresInTournament } from "../api/Requests"
 import Navbar from "./Navbar";
 
 const Tournaments = () => {
@@ -18,6 +18,10 @@ const Tournaments = () => {
             })
         }).catch((error) => {console.log(error)})
     };
+
+    const updateScores = (tournamentId) => {
+        updateScoresInTournament(tournamentId)
+    }
 
     useEffect(() => {
         updateTournaments()
@@ -41,6 +45,9 @@ const Tournaments = () => {
                                 </td>
                                 <td>
                                     {tournament.competition}
+                                </td>
+                                <td>
+                                    <button onClick={() =>updateScores(tournament.id)}>Actualizar</button>
                                 </td>
                             </tr>         
                         </>)}
