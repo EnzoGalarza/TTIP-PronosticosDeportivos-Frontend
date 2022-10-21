@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { updateTournamentsData, updateScoresInTournament } from "../api/Requests"
+import { updateTournamentsData, updateScoresInTournament } from "../api/Requests";
 import Navbar from "./Navbar";
+import "../styles/Tournaments.css";
+import Tournament from "./Tournament";
+import Table from 'react-bootstrap/Table';
 
 const Tournaments = () => {
 
@@ -32,26 +35,21 @@ const Tournaments = () => {
             <header>
                 <Navbar/>
             </header>
-            <table>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Competencia</th>
-                </tr>        
-                {tournamentsData.tournaments.map(tournament => 
-                        <>
-                            <tr>
-                                <td>
-                                    {tournament.name}
-                                </td>
-                                <td>
-                                    {tournament.competition}
-                                </td>
-                                <td>
-                                    <button onClick={() =>updateScores(tournament.id)}>Actualizar</button>
-                                </td>
-                            </tr>         
-                        </>)}
-            </table>
+            <div className="tournaments-table-container">
+                <Table className="tournaments-table" responsive="sm" striped hover bordered size="sm">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Competición</th>
+                            <th>Actualizar puntos</th>
+                            <th>Ver torneo</th>
+                        </tr>   
+                    </thead>     
+                    {tournamentsData.tournaments.map(tournament => 
+                        <Tournament key={tournament.id} tournament={tournament} updateScores={updateScores}
+                    />)}        
+                </Table>
+            </div>    
         </div>
     )
 }

@@ -6,6 +6,7 @@ import Team from "./Team";
 
 function Match({match, getPredictionGoals, updateGoal}){
     {
+        console.log('Match es: ', match)
         return(
         <div id= "match" className="card">
             <div className="card-header">
