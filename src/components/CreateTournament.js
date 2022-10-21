@@ -61,6 +61,10 @@ const CreateTournament = () => {
     }
 
     const createTournament = () => {
+        setTournamentData({
+            ...tournamentData,
+            criteria : updateTournamentCriteria(criteriaSelectionData)
+        })
         saveTournament(tournamentData)
             .then(
                 navigate("/home")
@@ -84,6 +88,11 @@ const CreateTournament = () => {
             }
             return criteria
         }))
+        setTournamentData({
+            ...tournamentData,
+            criteria : updateTournamentCriteria(criteriaSelectionData)
+        })
+        console.log(tournamentData)
     }
 
     const getCriteriaScore = (name) =>{
@@ -104,6 +113,10 @@ const CreateTournament = () => {
             newOptions.push({label: option.label, name: option.value, score: getCriteriaScore(option.value)})
         })}
         setCriteriaSelectionData(newOptions)
+        /*setTournamentData({
+            ...tournamentData,
+            criteria : updateTournamentCriteria(newOptions)
+        })*/
     };
 
     const handleNameInputChange = (event) => {
@@ -119,13 +132,31 @@ const CreateTournament = () => {
         })
     }
 
+    const updateTournamentCriteria = (options) =>{
+        var tournamentCriteria = []
+        options.map((option =>{
+            tournamentCriteria.push({name: option.name, score: option.score})
+        }))
+        console.log(tournamentCriteria)
+        return tournamentCriteria
+    }
+
+
     const handleSubmit = (event) =>{
-        event.preventDefault()
-        createTournament()
+        //event.preventDefault()
+        /*setTournamentData({
+            ...tournamentData,
+            criteria : updateTournamentCriteria(criteriaSelectionData)
+        })
+        createTournament()*/
     }
 
     useEffect(() => {
         updateCompetitions();
+        setTournamentData({
+            ...tournamentData,
+            criteria : updateTournamentCriteria(criteriaSelectionData)
+        })
     },[]);
 
     return(
@@ -184,7 +215,7 @@ const CreateTournament = () => {
                         </div>
                     )}
                     <div className="createButton">        
-                        <button type="submit" className="btn btn-primary">Crear</button>
+                        <button type="submit" className="btn btn-primary" onClick={() => createTournament()}>Crear</button>
                     </div> 
                 </form>
             </div>
