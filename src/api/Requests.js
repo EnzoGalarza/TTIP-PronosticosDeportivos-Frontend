@@ -9,7 +9,6 @@ const getToken = () => ({
 })
 
 export const getCompetitions = () => {
-    console.log(getToken())
     return axios.get(`${urlBASE}/competitions`, getToken())
 }
 

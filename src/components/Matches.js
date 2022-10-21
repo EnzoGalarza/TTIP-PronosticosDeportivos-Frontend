@@ -25,7 +25,6 @@ const Matches = () => {
     const updatePredictions = () => {
         getPredictions(localStorage.getItem("user"),compId)
         .then((response) => {
-            console.log("Reponse predictions : ", response)
             setPredictionsData(
                 response.data
             )
@@ -72,7 +71,6 @@ const Matches = () => {
     };
 
     const updateGoal = (matchToSave, team, goals) => {
-        console.log("Goles " + goals)
         var newPrediction =  findPrediction(matchToSave.id)
 
         if(!newPrediction){
@@ -158,6 +156,7 @@ const Matches = () => {
                         <Select
                             className="basic-single"
                             classNamePrefix="select"
+                            placeholder="Seleccionar fecha"
                             defaultValue={matchDayOptionsData.matchDayOptions[0]}
                             isDisabled={false}
                             isLoading={false}
