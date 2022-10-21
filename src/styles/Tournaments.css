@@ -1,0 +1,11 @@
+.tournaments-table-container{
+    padding-top: 20px;
+}
+
+.tournaments-table{
+    width: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
