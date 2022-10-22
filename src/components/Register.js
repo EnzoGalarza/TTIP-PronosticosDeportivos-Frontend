@@ -89,7 +89,7 @@ const RegisterUser = () => {
                 <h1 id="RegisterTitle">
                     Registrarme
                 </h1>
-                {(data.image !== genericprofile) && <img id="ProfilePicture" src={data.image}/>}
+                {(data.image !== genericprofile) && <img id="ProfilePicture" src={data.image} alt="user-image"/>}
                 <input 
                     id="RegisterNameInput" 
                     name = "name"

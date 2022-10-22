@@ -1,6 +1,6 @@
 import {Modal, ModalHeader, ModalBody} from 'reactstrap';
 import React, { useState, useEffect } from "react";
-import {getTournament, getUsers, sendInvitation} from "../api/Requests"
+import { getUsers, sendInvitation} from "../api/Requests"
 import { useNavigate } from "react-router-dom";
 import $ from "jquery";
 
@@ -46,11 +46,11 @@ function Tournament({tournament, updateScores}){
 
     const addUser = (email) => {
         const userToInvite = usersData.find((user => {
-            return user == email
+            return user === email
         }))
 
         const userInvited = usersInvitationData.find((user => {
-            return user == email
+            return user === email
         }))
 
         if(userInvited){

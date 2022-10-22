@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { getCompetitions, getUsers, saveTournament } from "../api/Requests"
+import { getCompetitions, saveTournament } from "../api/Requests"
 import { useNavigate } from "react-router-dom";
 import "../styles/CreateTournament.css";
 import Navbar from "./Navbar";
@@ -37,11 +37,6 @@ const CreateTournament = () => {
     const [competitionPicture, setCompetitionPicture] = useState({
         image: ''
     })
-
-    const [usersData, setUsersData] = useState({
-        users: []
-    })
-
 
     const updateCompetitions = () => {
         getCompetitions()
@@ -100,9 +95,13 @@ const CreateTournament = () => {
 
     const handleCriteriaSelectionChange = (event) => {
         var newOptions = []
-        {event.map(option => {
-            newOptions.push({label: option.label, name: option.value, score: getCriteriaScore(option.value)})
-        })}
+        event.map(option => 
+            newOptions.push({
+                label: option.label, 
+                name: option.value, 
+                score: getCriteriaScore(option.value)
+            })
+        )
         setCriteriaSelectionData(newOptions)
         setTournamentData({
             ...tournamentData,
@@ -125,9 +124,9 @@ const CreateTournament = () => {
 
     const updateTournamentCriteria = (options) =>{
         var tournamentCriteria = []
-        options.map((option =>{
+        options.map((option =>
             tournamentCriteria.push({name: option.name, score: option.score})
-        }))
+        ))
         return tournamentCriteria
     }
 
