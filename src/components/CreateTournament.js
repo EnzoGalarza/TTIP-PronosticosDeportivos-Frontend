@@ -5,7 +5,6 @@ import "../styles/CreateTournament.css";
 import Navbar from "./Navbar";
 import Select from "react-select";
 import NumericInput from 'react-numeric-input'
-import makeAnimated from "react-select/animated";
 
 const CreateTournament = () => {
 
@@ -15,8 +14,6 @@ const CreateTournament = () => {
         {value: "Approach",    label: "Acercamiento"},
         {value: "WinnerOrTie", label: "Ganador"},
     ];
-
-    const animatedComponents = makeAnimated();
 
     const criteriaSelection = [];
     const [criteriaSelectionData, setCriteriaSelectionData] = useState(criteriaSelection)
@@ -120,6 +117,10 @@ const CreateTournament = () => {
         setCompetitionPicture({
             image: document.querySelector(`option[value="${event.target.value}"]`).dataset.eventImage
         })
+        setTournamentData({
+            ...tournamentData,
+            competition : event.target.value
+        })
     }
 
     const updateTournamentCriteria = (options) =>{
@@ -179,7 +180,6 @@ const CreateTournament = () => {
                             className="criteriaSelection"
                             classNamePrefix="select"
                             placeholder="Criterios de puntuación"
-                            components={animatedComponents}
                             isDisabled={false}
                             isLoading={false}
                             isClearable={false}
@@ -191,20 +191,23 @@ const CreateTournament = () => {
                             isMulti
                         />
                 </div>
+                {criteriaSelectionData.length > 0 &&
+                <div className='criteriaItemTitle'>
+                    <span>Criterio</span> <span>Puntaje</span>
+                </div>}
                 {criteriaSelectionData.map(selectionCriteria => 
                     <div className="criteriaItem">
                         {selectionCriteria.label}
                         <NumericInput 
                                   min={1}
                                   value={selectionCriteria.score}
-                                  className="awayResInput"
-                                  placeholder="Visitante"
+                                  className="scoreInput"
                                   onChange={value => updateScore(selectionCriteria.name, value)}
                                   />
                     </div>
                 )} 
                 <div className="createButton">        
-                    <button onClick={() => handleCreate()} type="submit" className="btn btn-primary">Crear</button>
+                    <button onClick={() => handleCreate()} type="submit" className="btn btn-primary create">Crear</button>
                 </div>
             </div> 
         </>    

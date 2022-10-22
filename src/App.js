@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import PrivateRoutes from "./components/PrivateRoutes";
 import CreateTournament from "./components/CreateTournament";
 import Tournaments from "./components/Tournaments";
+import UserTournament from "./components/UserTournament";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <Route element={<Profile/>} path="/profile"/>
             <Route element={<CreateTournament/>} path="/tournament/create"/>
             <Route element={<Tournaments/>} path="/tournaments"/>
+            <Route element={<UserTournament/>} path="/userTournament/:tournamentId"/>
             <Route element={<Matches/>} path="/matches/:compId"/>
           </Route>
         </Routes>
