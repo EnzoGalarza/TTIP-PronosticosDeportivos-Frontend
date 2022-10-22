@@ -68,15 +68,6 @@ const CreateTournament = () => {
 
     }
 
-    const updateUsers = () => {
-        getUsers()
-            .then((response) =>{
-                setUsersData({
-                    users: response.data
-                })
-            })
-    }
-
     const updateScore = (criteriaName, goals) =>{
         setCriteriaSelectionData(current => current.map(criteria =>{
             if(criteria.name === criteriaName){
@@ -141,8 +132,7 @@ const CreateTournament = () => {
     }
 
 
-    const handleSubmit = (event) =>{
-        event.preventDefault()
+    const handleCreate = () =>{
         createTournament()
     }
 
@@ -159,11 +149,33 @@ const CreateTournament = () => {
             <header>
                 <Navbar />
             </header>
-            <div className="container">
-                <form className="createTournament" onSubmit={handleSubmit}>
-                    <h1 className="tournamentTitle">
-                        Nuevo torneo
-                    </h1>
+            <div className="tournaments-form">
+                <div className="tournamentTitle">
+                    Nuevo torneo
+                </div>
+                <div className="inputName">        
+                    <input 
+                        type="text" 
+                        placeholder="Nombre" 
+                        id="nameInput"
+                        className="nameInput" 
+                        onChange={handleNameInputChange} 
+                        name="name">
+                    </input>
+                </div>
+                <div className="competitionName">    
+                    <select className="competitionInput" onChange={handleCompetitionInputChange} name="competition">
+                        {competitionsData.competitions.map(competition => 
+                            <option key={competition.code} data-event-image={competition.emblem} value={competition.code}>
+                                {competition.name}
+                            </option>)
+                        }
+                    </select>
+                </div>
+                <div className="pictureContainer">
+                    <img className="competitionPicture" id="CompetitionPicture" src={competitionPicture.image}/>
+                </div>
+                <div className="select-criteria">
                     <Select
                             className="criteriaSelection"
                             classNamePrefix="select"
@@ -179,41 +191,23 @@ const CreateTournament = () => {
                             onChange={handleCriteriaSelectionChange}
                             isMulti
                         />
-                    <input 
-                        type="text" 
-                        placeholder="Nombre" 
-                        id="nameInput"
-                        className="nameInput" 
-                        onChange={handleNameInputChange} 
-                        name="name">
-                    </input>
-                    <select className="competitionInput" onChange={handleCompetitionInputChange} name="competition">
-                        {competitionsData.competitions.map(competition => 
-                            <option key={competition.code} data-event-image={competition.emblem} value={competition.code}>
-                                {competition.name}
-                            </option>)
-                        }
-                    </select>
-                    <span className="pictureContainer">
-                        <img className="competitionPicture" id="CompetitionPicture" src={competitionPicture.image}/>
-                    </span>
-                    {criteriaSelectionData.map(selectionCriteria => 
-                        <div>
-                            {selectionCriteria.label} - 
-                            <NumericInput 
-                                      min={1}
-                                      value={selectionCriteria.score}
-                                      className="awayResInput"
-                                      placeholder="Visitante"
-                                      onChange={value => updateScore(selectionCriteria.name, value)}
-                                      />
-                        </div>
-                    )}
-                    <div className="createButton">        
-                        <button type="submit" className="btn btn-primary">Crear</button>
-                    </div> 
-                </form>
-            </div>
+                </div>
+                {criteriaSelectionData.map(selectionCriteria => 
+                    <div className="criteriaItem">
+                        {selectionCriteria.label}
+                        <NumericInput 
+                                  min={1}
+                                  value={selectionCriteria.score}
+                                  className="awayResInput"
+                                  placeholder="Visitante"
+                                  onChange={value => updateScore(selectionCriteria.name, value)}
+                                  />
+                    </div>
+                )} 
+                <div className="createButton">        
+                    <button onClick={() => handleCreate()} type="submit" className="btn btn-primary">Crear</button>
+                </div>
+            </div> 
         </>    
     )
 }

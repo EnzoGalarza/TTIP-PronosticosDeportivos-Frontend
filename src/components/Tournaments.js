@@ -43,6 +43,7 @@ const Tournaments = () => {
                             <th>Competición</th>
                             <th>Actualizar puntos</th>
                             <th>Ver torneo</th>
+                            <th>Agregar usuarios</th>
                         </tr>   
                     </thead>     
                     {tournamentsData.tournaments.map(tournament => 

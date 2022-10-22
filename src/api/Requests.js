@@ -36,8 +36,8 @@ export const login = (data) =>{
     return axios.post(`${urlBASE}/login`,data)
 }
 
-export const getUsers = () =>{
-    return axios.get(`${urlBASE}/users`)
+export const getUsers = (user) =>{
+    return axios.get(`${urlBASE}/users/${user}`,getToken())
 }
 
 export const updateTournamentsData = (user) => {
@@ -51,3 +51,7 @@ export const saveTournament = (data) =>{
 export const updateScoresInTournament = (id) => {
     return axios.put(`${urlBASE}/tournaments/update/${id}`,null, getToken())
 }
+
+export const sendInvitation = (id,data) => {
+    return axios.put(`${urlBASE}/tournaments/${id}`,data, getToken())
+} 

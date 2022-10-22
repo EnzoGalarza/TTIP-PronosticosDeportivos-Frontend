@@ -1,52 +1,52 @@
 
+.tournaments-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
 
 .tournamentTitle {
-    padding-top: 7%;
     font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
     font-style: italic;
     font-size: calc(20px + 2vmin);
-    text-align: center;
+    width: 350px;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
+.nameInput{
+    width: 350px;
+    padding: 10px;
 }
 
-.nameInput {
-    margin-top: 15px;
-    display: block;
-    padding: 5px;
-    width: 250px;
-}
-
-.competitionInput {
-    padding: 5px;
-    margin-top: 15px;
-    width: 250px;
-}
-
-.createButton {
-    padding: 5px;
-    margin-top: 15px;
-    text-align: center;
-}
-
-.input-group-text{
-    width: 100px
-}
-
-.pictureContainer{
-    display: inline;
-    float: right;
-    padding: 20px;
+.competitionInput{
+    width: 350px;
+    padding: 10px;
 }
 
 .competitionPicture{
+    padding: 10px;
     width: 150px;
     height: 150px;
 }
 
-.criteriaSelection{
-    width: 250px;
+.select-criteria{
+    width: max-content;
+    min-width: 350px;
+    padding: 10px;
 }
+
+.criteriaItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn.btn-primary{
+    width: 350px;
+    padding: 10px;
+}
+
+.awayResInput{
+    
+}
+
