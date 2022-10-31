@@ -25,6 +25,8 @@ const RegisterUser = () => {
 
     const [error, setError] = useState("")
 
+    const reader = new FileReader();
+
     const handleInputChange = (event) => {
         setData({
             ...data,
@@ -32,12 +34,19 @@ const RegisterUser = () => {
         });
     };
 
-    const handleImageInputChange = (event) => {
+    const handleImageInputChange = (event) => {n
+
         if(event.target.files.length > 0){
-            setData({
-                ...data,
-                image: URL.createObjectURL(event.target.files[0])
-            });
+            reader.readAsDataURL(event.target.files[0]);
+            reader.onload = function () {
+                setData({
+                    ...data,
+                    image: reader.result
+                });
+            };
+            reader.onerror = function (error) {
+                console.log('Error: ', error);
+            };
         }
         else{
             setData({
