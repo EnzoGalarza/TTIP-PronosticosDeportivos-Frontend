@@ -34,7 +34,7 @@ const RegisterUser = () => {
         });
     };
 
-    const handleImageInputChange = (event) => {n
+    const handleImageInputChange = (event) => {
 
         if(event.target.files.length > 0){
             reader.readAsDataURL(event.target.files[0]);
