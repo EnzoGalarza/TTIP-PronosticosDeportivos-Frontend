@@ -44,8 +44,8 @@ export const updateTournamentsData = (user) => {
     return axios.get(`${urlBASE}/tournaments/${user}`,getToken())
 }
 
-export const getTournamentUsers = (tournamentId) =>{
-    return axios.get(`${urlBASE}/tournamentUsers/${tournamentId}`,getToken())
+export const getTournamentScores = (tournamentId) =>{
+    return axios.get(`${urlBASE}/tournamentScores/${tournamentId}`,getToken())
 }
 
 export const saveTournament = (data) =>{

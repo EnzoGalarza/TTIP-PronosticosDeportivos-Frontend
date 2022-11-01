@@ -9,7 +9,9 @@ import Select from "react-select";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Matches = () => {
+
     const { compId } = useParams();
+    
     const predictions = [];
 
     const [matchesData, setMatchesData] = useState({

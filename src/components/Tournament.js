@@ -20,7 +20,7 @@ function Tournament({tournament, updateScores}){
     const navigate = useNavigate(); 
 
     const seeTournament = () => {
-        navigate(`/tournaments/${tournament.name}`)
+        navigate(`/userTournament/${tournament.id}`)
     }
 
     const showUsers = () => {
