@@ -12,7 +12,7 @@ const Tournaments = () => {
     })
 
     const updateTournaments = () => {
-        updateTournamentsData(localStorage.getItem("user"))
+        updateTournamentsData(localStorage.getItem("userId"))
         .then((response) => {
             console.log("tournaments response: ", response)
             setTournamentsData({

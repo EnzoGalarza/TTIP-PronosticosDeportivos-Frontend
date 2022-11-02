@@ -36,6 +36,7 @@ const Login = () => {
         login(data)
             .then((response) => {
                 localStorage.setItem("token", response.headers.authentication);
+                localStorage.setItem("userId", response.data.id)
                 localStorage.setItem("user", response.data.username)
                 localStorage.setItem("profileImage", response.data.profileImage)
                 navigate("/home");
