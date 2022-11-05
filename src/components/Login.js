@@ -42,11 +42,12 @@ const Login = () => {
                 navigate("/home");
             })
             .catch((error) => {
-                if(error.response){
+                console.log("Error login", error)
+                if(error.response.data){
                     setError(error.response.data)
                 }
                 else {
-                    setError("Usuario o contraseña incorrectos")
+                    setError("Falló la conexión con el servidor")
                 }
                 $('#alertLogin').fadeTo(2000, 500).slideUp(500, () => {
                     $('#alertLogin').slideUp(500)
