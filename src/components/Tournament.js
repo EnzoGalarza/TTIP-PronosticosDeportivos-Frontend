@@ -1,8 +1,9 @@
-import {Modal, ModalHeader, ModalBody} from 'reactstrap';
+import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import React, { useState, useEffect } from "react";
 import { getUsers, sendInvitation} from "../api/Requests"
 import { useNavigate } from "react-router-dom";
 import $ from "jquery";
+import "../styles/Tournaments.css"
 
 function Tournament({tournament, updateScores}){
 
@@ -23,10 +24,13 @@ function Tournament({tournament, updateScores}){
         navigate(`/userTournament/${tournament.id}`)
     }
 
-    const showUsers = () => {
+    const hide = () => {
         $('#alertReg').hide()
+    }
+
+    const showUsers = () => {
+        setTimeout(hide)
         setUsersModalState(!usersModalState)
-        console.log('USUARIOS A MOSTRAR: ', usersData)
     }
 
     const removeUser = (userEmail) =>{
@@ -75,10 +79,13 @@ function Tournament({tournament, updateScores}){
     const inviteUsers = () => {
         sendInvitation(tournament.id,usersInvitationData)
             .then((response) => {
-                console.log(response)
+                setTimeout(hide)
             })
             .catch((error) => {
-                console.log(error)
+                setError(error.response.data)
+                $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
+                    $('#alertReg').slideUp(500)
+                })
             })
     }
 
@@ -100,35 +107,42 @@ function Tournament({tournament, updateScores}){
             </tbody>
 
             <Modal id="UsersModal" data-refresh = "false" isOpen={usersModalState} toggle={() => showUsers([])}>
-                <ModalHeader>
-                        Users
+                <ModalHeader className="modal-header">
                         <span>
-                            <button id="CloseUsersButton" type="button" className="close" aria-hidden="true" onClick={() => showUsers([])}>x</button>
+                            Usuarios
+                        </span>
+                        <span>
+                            <button id="CloseUsersButton" type="button" className="btn btn-danger close" aria-hidden="true" onClick={() => showUsers([])}>X</button>
                         </span>
                 </ModalHeader>
-                <ModalBody>
-                    <input
-                        type="text" 
-                        placeholder="Email usuario" 
-                        id="emailInput"
-                        className="emailInput" 
-                        onChange={handleEmailInputChange} 
-                        value={emailData}
-                        name="email"
-                    >
-                    </input>
-                    <button onClick={() => addUser(emailData)}>Agregar usuario a invitar</button>
-
+                <ModalBody className="modal-body">
+                    <div className="user-container">
+                        <input
+                            type="text" 
+                            placeholder="Email usuario" 
+                            id="emailInput"
+                            className="emailInput" 
+                            onChange={handleEmailInputChange} 
+                            value={emailData}
+                            name="email"
+                        >
+                        </input>
+                        <button className="btn btn-success invite" onClick={() => addUser(emailData)}>Agregar usuario a invitar</button>
+                    </div>
                     {usersInvitationData.map(userEmail => 
-                    <div>
-                        {userEmail}
-                        <button onClick={() => removeUser(userEmail)}>Eliminar</button>
+                    <div className="remove-user">
+                        <div className="user-email">{userEmail}</div>
+                        <button className='btn btn-danger' onClick={() => removeUser(userEmail)}>Eliminar</button>
                     </div>)}
-                    <button onClick={() => inviteUsers()}> Invitar usuarios </button>
-                    <div id= "alertReg" className="alert alert-danger" role="alert">
+                </ModalBody>
+                <ModalFooter className="modal-footer">
+                    <div>    
+                        <button className="btn btn-primary" onClick={() => inviteUsers()}> Invitar usuarios </button>
+                    </div>    
+                    <div id= "alertReg" className="alert alert-danger invite-error" role="alert">
                         {error}
                     </div>
-                </ModalBody>
+                </ModalFooter>
             </Modal>
         </>    
     )

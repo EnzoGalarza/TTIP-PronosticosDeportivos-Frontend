@@ -14,7 +14,6 @@ const UserTournament = () => {
     })
 
     const columns = [
-
         {
             name: 'Nombre',
             selector: 'user.name'
@@ -22,6 +21,18 @@ const UserTournament = () => {
         {
             name: 'Puntaje',
             selector: 'score'
+        },
+        {
+            name: 'Aciertos',
+            selector: 'hits'
+        },
+        {
+            name: 'Pronosticos totales',
+            selector: 'totalPronostics'
+        },
+        {
+            name: 'Porcentaje de aciertos',
+            selector: 'percentage'
         }
     ]
 
@@ -31,6 +42,7 @@ const UserTournament = () => {
             setUserScoresData({
                 userScores: response.data
             })
+            console.log("USERS",response)
         }).catch((error) => {console.log(error)})
     }
 
@@ -43,7 +55,7 @@ const UserTournament = () => {
             <header>
                 <Navbar/>
             </header>
-            <div>
+            <div className="users-container">
                 <DataTable
                 columns={columns}
                 data={userScoresData.userScores}

@@ -57,5 +57,17 @@ export const updateScoresInTournament = (id) => {
 }
 
 export const sendInvitation = (id,data) => {
-    return axios.put(`${urlBASE}/tournaments/${id}`,data, getToken())
+    return axios.post(`${urlBASE}/tournaments/${id}`,data, getToken())
 } 
+
+export const getNotifications= (id) => {
+    return axios.get(`${urlBASE}/notifications/${id}`, getToken())
+}
+
+export const confirmInvitation = (tournamentId, userEmail) => {
+    return axios.post(`${urlBASE}/acceptInvitation?tournamentId=${tournamentId}&userEmail=${userEmail}`, null, getToken())
+}
+
+export const deleteNotification = (userId, notificationId) => {
+    return axios.delete(`${urlBASE}/notifications/${userId}/${notificationId}/delete`,getToken())
+}

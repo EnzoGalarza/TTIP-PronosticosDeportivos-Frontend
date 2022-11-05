@@ -10,6 +10,7 @@ import PrivateRoutes from "./components/PrivateRoutes";
 import CreateTournament from "./components/CreateTournament";
 import Tournaments from "./components/Tournaments";
 import UserTournament from "./components/UserTournament";
+import Notifications from "./components/Notifications"
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
             <Route element={<Tournaments/>} path="/tournaments"/>
             <Route element={<UserTournament/>} path="/userTournament/:tournamentId"/>
             <Route element={<Matches/>} path="/matches/:compId"/>
+            <Route element={<Notifications/>} path="/notifications"/>
           </Route>
         </Routes>
       </BrowserRouter>

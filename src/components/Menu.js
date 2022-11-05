@@ -25,6 +25,10 @@ function Menu(){
             navigate("/tournaments")
         }
 
+        const notifications = () => {
+            navigate("/notifications")
+        }
+
         const navigate = useNavigate(); 
 
         return(
@@ -51,6 +55,9 @@ function Menu(){
                     </MDBNavbar>
                     <div className={`menuItems ${showAnimated ? 'active' : ''}`}/>
                     <div className={`itemButtons ${showAnimated ? 'active' : ''}`}>
+                        <div id="ItemButton" type="button" className="itemButton" onClick={notifications}>
+                            Notificaciones
+                        </div>
                         <div id="ItemButton" type="button" className="itemButton" onClick={createTournament}>
                             Crear torneo
                         </div>

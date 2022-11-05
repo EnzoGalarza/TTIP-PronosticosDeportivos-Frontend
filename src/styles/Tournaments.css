@@ -9,3 +9,42 @@
     margin-right: auto;
 }
 
+.close{
+    margin-left: 340px;
+}
+
+.modal-header{
+    display: flex;
+}
+
+.modal-body{
+    height: 300px;
+    overflow-y: auto;
+}
+
+.invite{
+    margin-left: 50px;
+}
+
+.user-container{
+    display: flex;
+}
+
+.invite-error{
+    width: 498px;
+}
+
+.modal-footer{
+    display: flex;
+    justify-content: center;
+}
+
+.remove-user{
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+.user-email{
+    width: 100px;
+}
