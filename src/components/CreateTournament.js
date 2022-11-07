@@ -55,8 +55,13 @@ const CreateTournament = () => {
     const createTournament = () => {
         saveTournament(tournamentData)
             .then(
-                navigate("/home")
+                () => {
+                    navigate("/home")
+                }
             )
+            .catch((error) => {
+                console.log('Error de creación de torneo: ', error.response.data)
+            }) 
 
     }
 
@@ -132,7 +137,7 @@ const CreateTournament = () => {
     }
 
 
-    const handleCreate = () =>{
+    const handleCreate = (event) =>{
         createTournament()
     }
 
