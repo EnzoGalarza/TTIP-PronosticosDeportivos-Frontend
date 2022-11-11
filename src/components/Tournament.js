@@ -4,6 +4,8 @@ import { getUsers, sendInvitation} from "../api/Requests"
 import { useNavigate } from "react-router-dom";
 import $ from "jquery";
 import "../styles/Tournaments.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 function Tournament({tournament, updateScores}){
 
@@ -48,6 +50,11 @@ function Tournament({tournament, updateScores}){
         setEmailData(event.target.value)
     }
 
+    const handleAddUser = (event, email) => {
+        event.preventDefault();
+        addUser(emailData)
+    };
+
     const addUser = (email) => {
         const userToInvite = usersData.find((user => {
             return user === email
@@ -58,7 +65,7 @@ function Tournament({tournament, updateScores}){
         }))
 
         if(userInvited){
-            setError(`Usuario ${email} ya está en la lista`)
+            setError(`El usuario ${email} ya está en la lista`)
             $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
                 $('#alertReg').slideUp(500)
             })
@@ -66,7 +73,7 @@ function Tournament({tournament, updateScores}){
             if(userToInvite){
                 setUsersInvitationData(current => [...current, userToInvite])
             } else {
-                setError(`Usuario ${email} inexistente`)
+                setError(`El usuario ${email} no existe`)
                 $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
                     $('#alertReg').slideUp(500)
                 })
@@ -109,7 +116,7 @@ function Tournament({tournament, updateScores}){
             <Modal id="UsersModal" data-refresh = "false" isOpen={usersModalState} toggle={() => showUsers([])}>
                 <ModalHeader className="modal-header">
                         <span>
-                            Usuarios
+                            Invitar usuarios
                         </span>
                         <span>
                             <button id="CloseUsersButton" type="button" className="btn btn-danger close" aria-hidden="true" onClick={() => showUsers([])}>X</button>
@@ -127,17 +134,17 @@ function Tournament({tournament, updateScores}){
                             name="email"
                         >
                         </input>
-                        <button className="btn btn-success invite" onClick={() => addUser(emailData)}>Agregar usuario a invitar</button>
+                        <button className="btn btn-success invite" onClick={() => addUser(emailData)}>Agregar</button>
                     </div>
                     {usersInvitationData.map(userEmail => 
                     <div className="remove-user">
                         <div className="user-email">{userEmail}</div>
-                        <button className='btn btn-danger' onClick={() => removeUser(userEmail)}>Eliminar</button>
+                        <button className='btn btn-danger close' onClick={() => removeUser(userEmail)}><FontAwesomeIcon icon={faTrashCan} /></button>
                     </div>)}
                 </ModalBody>
                 <ModalFooter className="modal-footer">
                     <div>    
-                        <button className="btn btn-primary" onClick={() => inviteUsers()}> Invitar usuarios </button>
+                        <button className="btn btn-primary" onClick={() => inviteUsers()}> Enviar invitación </button>
                     </div>    
                     <div id= "alertReg" className="alert alert-danger invite-error" role="alert">
                         {error}

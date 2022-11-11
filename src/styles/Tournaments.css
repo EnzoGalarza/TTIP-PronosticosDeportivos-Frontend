@@ -10,7 +10,7 @@
 }
 
 .close{
-    margin-left: 340px;
+    margin-left: 280px;
 }
 
 .modal-header{
@@ -23,11 +23,12 @@
 }
 
 .invite{
-    margin-left: 50px;
+    margin-left: 150px;
 }
 
 .user-container{
     display: flex;
+    margin-left: 20px;
 }
 
 .invite-error{
@@ -41,10 +42,14 @@
 
 .remove-user{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 5px;
+    margin-left: 20px;
+    margin-right: 40px;
 }
 
 .user-email{
     width: 100px;
+    padding: 5px;
+    margin-top: 5px;
 }
