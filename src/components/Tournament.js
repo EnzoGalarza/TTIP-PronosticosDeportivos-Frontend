@@ -50,11 +50,6 @@ function Tournament({tournament, updateScores}){
         setEmailData(event.target.value)
     }
 
-    const handleAddUser = (event, email) => {
-        event.preventDefault();
-        addUser(emailData)
-    };
-
     const addUser = (email) => {
         const userToInvite = usersData.find((user => {
             return user === email
@@ -87,6 +82,8 @@ function Tournament({tournament, updateScores}){
         sendInvitation(tournament.id,usersInvitationData)
             .then((response) => {
                 setTimeout(hide)
+                setUsersInvitationData([])
+                setUsersModalState(!usersModalState)
             })
             .catch((error) => {
                 setError(error.response.data)
@@ -139,7 +136,7 @@ function Tournament({tournament, updateScores}){
                     {usersInvitationData.map(userEmail => 
                     <div className="remove-user">
                         <div className="user-email">{userEmail}</div>
-                        <button className='btn btn-danger close' onClick={() => removeUser(userEmail)}><FontAwesomeIcon icon={faTrashCan} /></button>
+                        <button className='btn btn-danger' onClick={() => removeUser(userEmail)}><FontAwesomeIcon icon={faTrashCan} /></button>
                     </div>)}
                 </ModalBody>
                 <ModalFooter className="modal-footer">
