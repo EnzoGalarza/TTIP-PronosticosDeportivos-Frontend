@@ -64,8 +64,8 @@ export const getNotifications= (id) => {
     return axios.get(`${urlBASE}/notifications/${id}`, getToken())
 }
 
-export const confirmInvitation = (tournamentId, userEmail) => {
-    return axios.post(`${urlBASE}/acceptInvitation?tournamentId=${tournamentId}&userEmail=${userEmail}`, null, getToken())
+export const confirmInvitation = (tournamentId, userEmail, notificationId) => {
+    return axios.post(`${urlBASE}/acceptInvitation?tournamentId=${tournamentId}&userEmail=${userEmail}&invitationId=${notificationId}`, null, getToken())
 }
 
 export const deleteNotification = (userId, notificationId) => {
