@@ -26,16 +26,21 @@ const Notifications = () => {
     }
 
     const acceptInvitation = (tournamentId, userEmail, notificationId) => {
-        confirmInvitation(tournamentId,userEmail)
+        confirmInvitation(tournamentId,userEmail,notificationId)
             .then((response) => {
-                deleteNotification(localStorage.getItem("userId"), notificationId)
-                    .then((response) => {
-                        navigate("/tournaments")
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                    })
+                navigate("/tournaments")
+                    
             })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    const declineInvitation = (userId, notificationId) => {
+        deleteNotification(userId,notificationId)
+            .then(
+                navigate("/tournaments")
+            )
             .catch((error) => {
                 console.log(error)
             })
@@ -61,7 +66,7 @@ const Notifications = () => {
                     </thead>     
                     {userNotificationsData.notifications.map(notification => 
                         <Notification key={notification.id} tournamentId={notification.tournamentId} id={notification.id} message={notification.message} 
-                                        acceptable={notification.acceptable} acceptInvitation={acceptInvitation}/>)
+                                        acceptable={notification.acceptable} acceptInvitation={acceptInvitation} declineInvitation={declineInvitation}/>)
                     }        
                 </Table>
             </div>    
