@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import { Table } from 'react-bootstrap';
 import Notification from './Notification';
 import { useNavigate } from "react-router-dom";
+import $ from "jquery";
 
 const Notifications = () => {
 
@@ -13,6 +14,8 @@ const Notifications = () => {
     const [userNotificationsData, setUserNotificationsData] = useState({
         notifications: []
     })
+
+    const [confirmation, setConfirmation] = useState("")
 
     const updateNotifications = () => {
         getNotifications(localStorage.getItem("userId"))
@@ -25,16 +28,33 @@ const Notifications = () => {
         .catch((error) => {console.log(error)})
     }
 
+    const hide = () => {
+        $('#alertReg').hide()
+        $('#alertConfirm').hide()
+    }
+
     const acceptInvitation = (tournamentId, userEmail, notificationId) => {
-        confirmInvitation(tournamentId,userEmail)
+        confirmInvitation(tournamentId,userEmail,notificationId)
             .then((response) => {
-                deleteNotification(localStorage.getItem("userId"), notificationId)
-                    .then((response) => {
-                        navigate("/tournaments")
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                    })
+                navigate("/tournaments")
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    const showConfirmation = (message) => {
+        setConfirmation(message)
+        $('#alertConfirm').fadeTo(2000, 500).slideUp(500, () => {
+            $('#alertConfirm').slideUp(500)
+        })
+    }
+
+    const declineInvitation = (userId, notificationId) => {
+        deleteNotification(userId,notificationId)
+            .then(() => {
+                showConfirmation("Invitación eliminada correctamente")
+                updateNotifications()
             })
             .catch((error) => {
                 console.log(error)
@@ -42,6 +62,7 @@ const Notifications = () => {
     }
 
     useEffect(() => {
+        setTimeout(hide)
         updateNotifications()
     },[]);
 
@@ -61,9 +82,12 @@ const Notifications = () => {
                     </thead>     
                     {userNotificationsData.notifications.map(notification => 
                         <Notification key={notification.id} tournamentId={notification.tournamentId} id={notification.id} message={notification.message} 
-                                        acceptable={notification.acceptable} acceptInvitation={acceptInvitation}/>)
+                                        acceptable={notification.acceptable} acceptInvitation={acceptInvitation} declineInvitation={declineInvitation}/>)                                        
                     }        
                 </Table>
+                <div id="alertConfirm" className="alert alert-success confirm-delete">
+                    {confirmation}
+                </div>
             </div>    
         </div>
     )

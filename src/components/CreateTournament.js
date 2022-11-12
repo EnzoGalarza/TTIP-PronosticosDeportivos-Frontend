@@ -5,6 +5,7 @@ import "../styles/CreateTournament.css";
 import Navbar from "./Navbar";
 import Select from "react-select";
 import NumericInput from 'react-numeric-input'
+import $ from "jquery";
 
 const CreateTournament = () => {
 
@@ -62,7 +63,6 @@ const CreateTournament = () => {
             .catch((error) => {
                 console.log('Error de creación de torneo: ', error.response.data)
             }) 
-
     }
 
     const updateScore = (criteriaName, goals) =>{

@@ -1,6 +1,6 @@
 img.teamCrest{
-    width: 150px;
-    height: 150px;
+    width: 125px;
+    height: 125px;
     padding: 20px;
     text-align: center;
 }
@@ -22,7 +22,8 @@ img.teamCrest{
 }
 
 .result{
-    padding-top: 40%;
+    font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
+    font-size: calc(5px + 2vmin);
 }
 
 .prediction{
@@ -58,12 +59,18 @@ img.teamCrest{
     position: fixed;
 }
 
+.card-header{
+    font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
+    font-weight: bold;
+    font-size: large;
+}
+
 #match{
     display: flex;
     justify-content: center;
     width: 20cm;
 }
 
-#matchBody{
-    text-align: center;
+#saveBtn{
+    margin-left: 10px;
 }

@@ -27,7 +27,7 @@ const UserTournament = () => {
             selector: 'hits'
         },
         {
-            name: 'Pronosticos totales',
+            name: 'Pronósticos evaluados',
             selector: 'totalPronostics'
         },
         {
