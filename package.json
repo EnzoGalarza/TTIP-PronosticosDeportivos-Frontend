@@ -13,6 +13,7 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.2.2",
     "jquery": "^3.6.1",
+    "jquery-confirm": "^3.3.4",
     "mdb-react-ui-kit": "^4.2.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
