@@ -20,6 +20,8 @@ function Tournament({tournament, updateScores}){
 
     const [error, setError] = useState("")
 
+    const [invitationConfirm, setInvitationConfirm] = useState("")
+
     const navigate = useNavigate(); 
 
     const seeTournament = () => {
@@ -28,6 +30,7 @@ function Tournament({tournament, updateScores}){
 
     const hide = () => {
         $('#alertReg').hide()
+        $('#alertConfirm').hide()
     }
 
     const showUsers = () => {
@@ -60,41 +63,46 @@ function Tournament({tournament, updateScores}){
         }))
 
         if(userInvited){
-            setError(`El usuario ${email} ya está en la lista`)
-            $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
-                $('#alertReg').slideUp(500)
-            })
+            showError(`El usuario ${email} ya está en la lista`)
         } else{
             if(userToInvite){
                 setUsersInvitationData(current => [...current, userToInvite])
             } else {
-                setError(`El usuario ${email} no existe`)
-                $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
-                    $('#alertReg').slideUp(500)
-                })
+                showError(`El usuario ${email} no existe`)
             }
         }
 
         setEmailData('')
     }
 
+    const showConfirmation = (message) => {
+        setInvitationConfirm(message)
+        $('#alertConfirm').fadeTo(2000, 500).slideUp(500, () => {
+            $('#alertConfirm').slideUp(500)
+        })
+    }
+
+    const showError = (message) => {
+        setError(message)
+        $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
+            $('#alertReg').slideUp(500)
+        })
+    }
+
     const inviteUsers = () => {
         sendInvitation(tournament.id,usersInvitationData)
             .then((response) => {
-                setTimeout(hide)
                 setUsersInvitationData([])
-                setUsersModalState(!usersModalState)
+                showConfirmation("Usuarios invitados al torneo")
             })
             .catch((error) => {
-                setError(error.response.data)
-                $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
-                    $('#alertReg').slideUp(500)
-                })
+                showError(error.response.data)
             })
     }
 
     useEffect(() => {
         $('#alertReg').hide()
+        $('#alertConfirm').hide()
         updateUsers()
     },[]);
 
@@ -145,6 +153,9 @@ function Tournament({tournament, updateScores}){
                     </div>    
                     <div id= "alertReg" className="alert alert-danger invite-error" role="alert">
                         {error}
+                    </div>
+                    <div id="alertConfirm" className="alert alert-success invite-error" role="alert">
+                        {invitationConfirm}
                     </div>
                 </ModalFooter>
             </Modal>
