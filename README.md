@@ -1,3 +1,5 @@
+[![build](https://github.com/EnzoGalarza/TTIP-PronosticosDeportivos-Frontend/actions/workflows/build.yml/badge.svg)](https://github.com/EnzoGalarza/TTIP-PronosticosDeportivos-Frontend/actions/workflows/build.yml)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
