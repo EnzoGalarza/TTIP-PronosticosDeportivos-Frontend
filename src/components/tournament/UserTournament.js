@@ -50,6 +50,7 @@ const UserTournament = () => {
 
     const updateScores = () => {
         updateScoresInTournament(tournamentId)
+        window.location.reload(false)
     }
 
     useEffect(() => {

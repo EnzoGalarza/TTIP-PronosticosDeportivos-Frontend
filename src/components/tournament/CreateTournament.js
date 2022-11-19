@@ -171,10 +171,10 @@ const CreateTournament = () => {
                         name="name">
                     </input>
                 </div>
-                <div data-testid="competition" className="competitionName">    
-                    <select className="competitionInput" onChange={handleCompetitionInputChange} name="competition">
+                <div className="competitionName">    
+                    <select data-testid="competition" className="competitionInput" onChange={handleCompetitionInputChange} name="competition">
                         {competitionsData.competitions.map(competition => 
-                            <option key={competition.code} data-event-image={competition.emblem} value={competition.code}>
+                            <option data-testid="competition-option" key={competition.code} data-event-image={competition.emblem} value={competition.code}>
                                 {competition.name}
                             </option>)
                         }
@@ -185,6 +185,7 @@ const CreateTournament = () => {
                 </div>
                 <div className="select-criteria">
                     <Select
+                            data-testid="criteria-selection"
                             className="criteriaSelection"
                             classNamePrefix="select"
                             placeholder="Criterios de puntuación"

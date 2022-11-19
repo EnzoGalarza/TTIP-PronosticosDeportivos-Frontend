@@ -30,8 +30,11 @@ describe('Create Tournament', () => {
         </BrowserRouter>)
 
         const tournamentName = screen.getByTestId('tournament-name')
+        const tournamentCompetition = screen.getByTestId('competition')
+        
         userEvent.type(tournamentName, 'Torneo nuevo')
-
+        
         expect(screen.getByTestId('tournament-name').value).toBe('Torneo nuevo')
+
     })
 })
