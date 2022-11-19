@@ -7,7 +7,7 @@ import "../../styles/Tournaments.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
-function Tournament({tournament, updateScores}){
+function Tournament({tournament}){
 
 
     const [usersModalState, setUsersModalState] = useState(false)
@@ -91,7 +91,7 @@ function Tournament({tournament, updateScores}){
 
     const inviteUsers = () => {
         sendInvitation(tournament.id,usersInvitationData)
-            .then((response) => {
+            .then(() => {
                 if(usersInvitationData.length > 0){
                     showConfirmation("Usuarios invitados al torneo")
                     setUsersInvitationData([])
@@ -147,6 +147,7 @@ function Tournament({tournament, updateScores}){
                         </input>
                         <button className="btn btn-success invite" onClick={() => addUser(emailData)}>Agregar</button>
                     </div>
+                    <hr></hr>
                     {usersInvitationData.map(userEmail => 
                     <div className="remove-user">
                         <div className="user-email">{userEmail}</div>

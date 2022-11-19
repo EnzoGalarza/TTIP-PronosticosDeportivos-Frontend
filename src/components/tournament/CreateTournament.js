@@ -142,7 +142,7 @@ const CreateTournament = () => {
     }
 
     useEffect(() => {
-        // eslint-disable-next-line
+        
         updateCompetitions();
         setTournamentData({
             ...tournamentData,

@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import Navbar from "../Navbar";
 import "../../styles/UserTournament.css"
 import DataTable from "react-data-table-component";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
 
 const UserTournament = () => {
 
@@ -52,6 +54,7 @@ const UserTournament = () => {
 
     useEffect(() => {
         updateUsersScores()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     return(
@@ -60,7 +63,7 @@ const UserTournament = () => {
                 <Navbar/>
             </header>
             <div className="users-container">
-                <button onClick={() => updateScores()}>Actualizar</button>
+                <button className="btn btn-primary" onClick={() => updateScores()}><FontAwesomeIcon icon={faArrowsRotate} /> Actualizar resultados</button>
                 <DataTable
                 columns={columns}
                 data={userScoresData.userScores}

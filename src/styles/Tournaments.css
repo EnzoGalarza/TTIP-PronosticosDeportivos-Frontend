@@ -10,7 +10,7 @@
 }
 
 .close{
-    margin-left: 280px;
+    margin-left: 305px;
 }
 
 .modal-header{
@@ -23,7 +23,7 @@
 }
 
 .invite{
-    margin-left: 150px;
+    margin-left: 45px;
 }
 
 .user-container{
@@ -54,8 +54,8 @@
     margin-top: 5px;
 }
 
-.emailInput{
-    width: 500px;
+.emailInput {
+    width: 300px;
 }
 
 .tournaments-nodata{
