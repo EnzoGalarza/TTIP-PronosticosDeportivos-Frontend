@@ -31,5 +31,7 @@ describe('Create Tournament', () => {
 
         const tournamentName = screen.getByTestId('tournament-name')
         userEvent.type(tournamentName, 'Torneo nuevo')
+
+        expect(screen.getByTestId('tournament-name').value).toBe('Torneo nuevo')
     })
 })

@@ -158,9 +158,9 @@ const CreateTournament = () => {
                 <div data-testid="tournament-title" className="tournamentTitle">
                     Nuevo torneo
                 </div>
-                <div data-testid="tournament-name" className="inputName">        
+                <div  className="inputName">        
                     <input 
-                        data-testid="input-tournament-name"
+                        data-testid="tournament-name"
                         type="text" 
                         placeholder="Nombre" 
                         id="nameInput"
