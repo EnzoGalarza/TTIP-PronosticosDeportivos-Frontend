@@ -142,12 +142,14 @@ const CreateTournament = () => {
     }
 
     useEffect(() => {
+        // eslint-disable-next-line
         updateCompetitions();
         setTournamentData({
             ...tournamentData,
             criteria : updateTournamentCriteria(criteriaSelectionData)
         })
-    },[]);
+        // eslint-disable-next-line
+    },[]); 
 
     return(
        <> 

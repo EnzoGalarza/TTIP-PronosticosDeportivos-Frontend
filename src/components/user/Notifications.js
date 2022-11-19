@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "../../styles/Notifications.css"
+import '../../styles/index.css'
 import { getNotifications, confirmInvitation, deleteNotification } from "../../api/Requests"
 import Navbar from '../Navbar';
 import { Table } from 'react-bootstrap';

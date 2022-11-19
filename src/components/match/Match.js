@@ -2,6 +2,7 @@ import "../../styles/Matches.css"
 import NumericInput from 'react-numeric-input'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Team from "./Team";
+import '../../styles/index.css'
 
 const weekDayFormatter = (input) => {
     switch (input) {

@@ -7,11 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-html {
-  font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html, body {
+  font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS' !important
 }

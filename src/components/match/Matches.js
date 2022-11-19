@@ -3,6 +3,7 @@ import { getPredictions, getMatches, getCurrentMatchDay, savePronostics } from "
 import Match from "./Match";
 import Navbar from "../Navbar";
 import "../../styles/Matches.css"
+import '../../styles/index.css'
 import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Select from "react-select";

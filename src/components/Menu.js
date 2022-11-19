@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "../styles/Menu.css"
+import '../styles/index.css'
 import { useNavigate } from "react-router-dom";
 import {
   MDBContainer,

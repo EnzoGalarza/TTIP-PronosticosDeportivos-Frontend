@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import { login } from "../../api/Requests"
 import { useNavigate } from "react-router-dom";
 import '../../styles/Login.css';
+import '../../styles/index.css'
 import $ from "jquery";
 import Navbar from "../Navbar";
 

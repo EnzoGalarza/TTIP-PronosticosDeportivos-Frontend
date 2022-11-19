@@ -11,6 +11,7 @@ import CreateTournament from "./components/tournament/CreateTournament";
 import Tournaments from "./components/tournament/Tournaments";
 import UserTournament from "./components/tournament/UserTournament";
 import Notifications from "./components/user/Notifications"
+import './styles/index.css'
 
 const App = () => {
   return (

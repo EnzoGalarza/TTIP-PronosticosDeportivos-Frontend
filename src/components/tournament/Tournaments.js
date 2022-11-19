@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { updateTournamentsData, updateScoresInTournament } from "../../api/Requests";
+import { updateTournamentsData } from "../../api/Requests";
 import Navbar from "../Navbar";
 import '../../styles/Tournaments.css'
 import Tournament from "./Tournament";
