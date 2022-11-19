@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getPredictions, getMatches, getCurrentMatchDay, savePronostics } from "../api/Requests"
+import { getPredictions, getMatches, getCurrentMatchDay, savePronostics } from "../../api/Requests"
 import Match from "./Match";
-import Navbar from "./Navbar";
-import "../styles/Matches.css"
+import Navbar from "../Navbar";
+import "../../styles/Matches.css"
 import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Select from "react-select";
@@ -144,6 +144,7 @@ const Matches = () => {
     useEffect(() => {
         updateMatchesData();
         updatePredictions();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
 

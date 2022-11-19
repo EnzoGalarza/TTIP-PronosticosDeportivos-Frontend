@@ -1,5 +1,5 @@
-import Navbar from "./Navbar";
-import "../styles/Profile.css"
+import Navbar from "../Navbar";
+import "../../styles/Profile.css"
 
 const Profile = () => {
 

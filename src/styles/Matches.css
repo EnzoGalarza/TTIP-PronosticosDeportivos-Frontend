@@ -18,11 +18,11 @@ img.teamCrest{
 }
 
 .teamName{
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    /*font-family: Georgia, 'Times New Roman', Times, serif;*/
 }
 
 .result{
-    font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
+    /*font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';*/
     font-size: calc(5px + 2vmin);
 }
 
@@ -60,7 +60,7 @@ img.teamCrest{
 }
 
 .card-header{
-    font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
+    /*font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';*/
     font-weight: bold;
     font-size: large;
 }

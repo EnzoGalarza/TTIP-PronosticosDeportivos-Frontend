@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getTournamentScores } from "../api/Requests"
+import { getTournamentScores, updateScoresInTournament } from "../../api/Requests"
 import { useParams } from 'react-router-dom';
-import Navbar from "./Navbar";
-import "../styles/UserTournament.css"
+import Navbar from "../Navbar";
+import "../../styles/UserTournament.css"
 import DataTable from "react-data-table-component";
 
 const UserTournament = () => {
@@ -46,6 +46,10 @@ const UserTournament = () => {
         }).catch((error) => {console.log(error)})
     }
 
+    const updateScores = () => {
+        updateScoresInTournament(tournamentId)
+    }
+
     useEffect(() => {
         updateUsersScores()
     },[]);
@@ -56,6 +60,7 @@ const UserTournament = () => {
                 <Navbar/>
             </header>
             <div className="users-container">
+                <button onClick={() => updateScores()}>Actualizar</button>
                 <DataTable
                 columns={columns}
                 data={userScoresData.userScores}

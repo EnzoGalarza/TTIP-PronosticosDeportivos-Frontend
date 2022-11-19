@@ -1,9 +1,9 @@
 import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import React, { useState, useEffect } from "react";
-import { getUsers, sendInvitation} from "../api/Requests"
+import { getUsers, sendInvitation} from "../../api/Requests"
 import { useNavigate } from "react-router-dom";
 import $ from "jquery";
-import "../styles/Tournaments.css"
+import "../../styles/Tournaments.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
@@ -118,7 +118,7 @@ function Tournament({tournament, updateScores}){
                 <tr>    
                     <td>{tournament.name}</td>
                     <td>{tournament.competition}</td>
-                    <td><button onClick={() =>updateScores(tournament.id)}>Actualizar</button></td>
+                    
                     <td><button onClick={() => seeTournament()}>Ver</button></td>
                     <td><button onClick={() => showUsers()}>Agregar usuarios</button></td>
                 </tr>    

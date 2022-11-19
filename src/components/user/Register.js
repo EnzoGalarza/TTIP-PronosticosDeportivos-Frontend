@@ -1,10 +1,10 @@
-import '../styles/Register.css';
+import '../../styles/Register.css';
 import React, { useState, useEffect} from "react";
-import { registerUser } from "../api/Requests"
+import { registerUser } from "../../api/Requests"
 import { useNavigate } from "react-router-dom";
 import $ from "jquery";
-import Navbar from "./Navbar";
-import genericprofile from '../images/genericprofile.jpg';
+import Navbar from "../Navbar";
+import genericprofile from '../../images/genericprofile.jpg';
 
 const RegisterUser = () => {
 
@@ -37,16 +37,23 @@ const RegisterUser = () => {
     const handleImageInputChange = (event) => {
 
         if(event.target.files.length > 0){
-            reader.readAsDataURL(event.target.files[0]);
-            reader.onload = function () {
-                setData({
-                    ...data,
-                    image: reader.result
-                });
-            };
-            reader.onerror = function (error) {
-                console.log('Error: ', error);
-            };
+            if(event.target.files[0].size > 1000000){
+                setError("Tamaño de imagen muy grande, debe ser menor a 1 megabyte")
+                $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
+                    $('#alertReg').slideUp(500)
+                })
+            } else {
+                reader.readAsDataURL(event.target.files[0]);
+                reader.onload = function () {
+                    setData({
+                        ...data,
+                        image: reader.result
+                    });
+                };
+                reader.onerror = function (error) {
+                    console.log('Error: ', error);
+                };
+            }        
         }
         else{
             setData({
@@ -95,10 +102,13 @@ const RegisterUser = () => {
                 <Navbar />
             </header>
             <form className="Register-main" onSubmit={handleSubmit}>
+                <div id= "alertReg" className="alert alert-danger" role="alert">
+                    {error}
+                </div>
                 <h1 id="RegisterTitle">
                     Registrarme
                 </h1>
-                {(data.image !== genericprofile) && <img id="ProfilePicture" src={data.image} alt="user-image"/>}
+                {(data.image !== genericprofile) && <img id="ProfilePicture" src={data.image} alt="user"/>}
                 <input 
                     id="RegisterNameInput" 
                     name = "name"
@@ -150,9 +160,6 @@ const RegisterUser = () => {
                     className="btn btn-primary">
                     Registrarme
                 </button>
-                <div id= "alertReg" className="alert alert-danger" role="alert">
-                    {error}
-                </div>
             </form>
         </>
     )

@@ -1,16 +1,16 @@
 import React from "react";
-import Login from "./components/Login";
-import Matches from "./components/Matches";
+import Login from "./components/user/Login";
+import Matches from "./components/match/Matches";
 import Home from "./components/Home";
-import Register from "./components/Register";
-import Profile from "./components/Profile";
+import Register from "./components/user/Register";
+import Profile from "./components/user/Profile";
 import PublicRoutes from "./components/PublicRoutes";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import PrivateRoutes from "./components/PrivateRoutes";
-import CreateTournament from "./components/CreateTournament";
-import Tournaments from "./components/Tournaments";
-import UserTournament from "./components/UserTournament";
-import Notifications from "./components/Notifications"
+import CreateTournament from "./components/tournament/CreateTournament";
+import Tournaments from "./components/tournament/Tournaments";
+import UserTournament from "./components/tournament/UserTournament";
+import Notifications from "./components/user/Notifications"
 
 const App = () => {
   return (

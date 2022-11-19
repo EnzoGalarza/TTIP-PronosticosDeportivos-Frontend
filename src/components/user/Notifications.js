@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import "../styles/Notifications.css"
-import { getNotifications, confirmInvitation, deleteNotification } from "../api/Requests"
-import Navbar from './Navbar';
+import "../../styles/Notifications.css"
+import { getNotifications, confirmInvitation, deleteNotification } from "../../api/Requests"
+import Navbar from '../Navbar';
 import { Table } from 'react-bootstrap';
 import Notification from './Notification';
 import { useNavigate } from "react-router-dom";
@@ -72,19 +72,24 @@ const Notifications = () => {
                 <Navbar/>
             </header>
             <div className="tournaments-table-container">
-                <Table className="tournaments-table" responsive="sm" striped hover bordered size="sm">
-                    <thead>
-                        <tr>
-                            <th>Mensaje</th>
-                            <th>Aceptar</th>
-                            <th>Rechazar</th>
-                        </tr>   
-                    </thead>     
-                    {userNotificationsData.notifications.map(notification => 
-                        <Notification key={notification.id} tournamentId={notification.tournamentId} id={notification.id} message={notification.message} 
-                                        acceptable={notification.acceptable} acceptInvitation={acceptInvitation} declineInvitation={declineInvitation}/>)                                        
-                    }        
-                </Table>
+                {userNotificationsData.notifications.length > 0 ?
+                    <Table className="tournaments-table" responsive="sm" striped hover bordered size="sm">
+                        <thead>
+                            <tr>
+                                <th>Mensaje</th>
+                                <th>Aceptar</th>
+                                <th>Rechazar</th>
+                            </tr>   
+                        </thead>     
+                        {userNotificationsData.notifications.map(notification => 
+                            <Notification key={notification.id} tournamentId={notification.tournamentId} id={notification.id} message={notification.message} 
+                                            acceptable={notification.acceptable} acceptInvitation={acceptInvitation} declineInvitation={declineInvitation}/>)                                        
+                        }        
+                    </Table> :
+                    <div className="notifications-nodata">
+                        No se encuentra ninguna notificación
+                    </div>
+                }
                 <div id="alertConfirm" className="alert alert-success confirm-delete">
                     {confirmation}
                 </div>

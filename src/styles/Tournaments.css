@@ -53,3 +53,11 @@
     padding: 5px;
     margin-top: 5px;
 }
+
+.emailInput{
+    width: 500px;
+}
+
+.tournaments-nodata{
+    text-align: center;
+}

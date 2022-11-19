@@ -21,15 +21,17 @@
 }
 
 #LoginUserInput {
+    width: 350px;
     padding: 7px;
 }
 
 #LoginPassInput {
+    width: 350px;
     padding: 7px;
 }
 
 #LoginTitle {
-    font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
+    /*font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';*/
     font-style: italic;
     font-size: calc(20px + 2vmin);
 }
@@ -43,11 +45,11 @@
 }
 
 .register{
-    font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
+    /*font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';*/
     font-size: calc(3px + 2vmin);
 }
 
 #RegisterBtn{
-    font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';
+    /*font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';*/
     font-size: calc(3px + 2vmin);
 }

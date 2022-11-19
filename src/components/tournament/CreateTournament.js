@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import { getCompetitions, saveTournament } from "../api/Requests"
+import { getCompetitions, saveTournament } from "../../api/Requests"
 import { useNavigate } from "react-router-dom";
-import "../styles/CreateTournament.css";
-import Navbar from "./Navbar";
+import "../../styles/CreateTournament.css";
+import Navbar from "../Navbar";
 import Select from "react-select";
 import NumericInput from 'react-numeric-input'
-import $ from "jquery";
+
 
 const CreateTournament = () => {
 
@@ -155,11 +155,12 @@ const CreateTournament = () => {
                 <Navbar />
             </header>
             <div className="tournaments-form">
-                <div className="tournamentTitle">
+                <div data-testid="tournament-title" className="tournamentTitle">
                     Nuevo torneo
                 </div>
-                <div className="inputName">        
+                <div data-testid="tournament-name" className="inputName">        
                     <input 
+                        data-testid="input-tournament-name"
                         type="text" 
                         placeholder="Nombre" 
                         id="nameInput"
@@ -168,7 +169,7 @@ const CreateTournament = () => {
                         name="name">
                     </input>
                 </div>
-                <div className="competitionName">    
+                <div data-testid="competition" className="competitionName">    
                     <select className="competitionInput" onChange={handleCompetitionInputChange} name="competition">
                         {competitionsData.competitions.map(competition => 
                             <option key={competition.code} data-event-image={competition.emblem} value={competition.code}>
@@ -178,7 +179,7 @@ const CreateTournament = () => {
                     </select>
                 </div>
                 <div className="pictureContainer">
-                    <img className="competitionPicture" id="CompetitionPicture" src={competitionPicture.image}/>
+                    <img alt="competition" className="competitionPicture" id="CompetitionPicture" src={competitionPicture.image}/>
                 </div>
                 <div className="select-criteria">
                     <Select

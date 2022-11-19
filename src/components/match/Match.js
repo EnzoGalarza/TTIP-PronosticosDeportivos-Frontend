@@ -1,32 +1,26 @@
-import "../styles/Matches.css"
+import "../../styles/Matches.css"
 import NumericInput from 'react-numeric-input'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Team from "./Team";
-
 
 const weekDayFormatter = (input) => {
     switch (input) {
         case 'MONDAY':
           return 'Lunes'
-          break;
         case 'TUESDAY':
           return 'Martes'
-          break;
         case 'WEDNESDAY':
           return 'Miércoles'
-          break;
         case 'THURSDAY':
             return 'Jueves'
-            break;
         case 'FRIDAY':
             return 'Viernes'
-            break;
         case 'SATURDAY':
             return 'Sábado'
-            break;
         case 'SUNDAY':
             return 'Domingo'
-            break;
+        default:
+            break;    
       }
 }
 
@@ -34,30 +28,25 @@ const matchStatusFormatter = (input) => {
     switch (input) {
         case 'LIVE':
           return 'Vivo'
-          break;
         case 'IN_PLAY':
           return 'En juego'
-          break;
         case 'PAUSED':
             return 'Entretiempo'
-            break;
         case 'FINISHED':
             return 'Finalizado'
-            break;
         case 'POSTPONED':
             return 'Pospuesto'
-            break;
         case 'SUSPENDED':
             return 'Suspendido'
-            break;
         case 'CANCELLED':
             return 'Cancelado'
-            break;
+        default:
+            break    
       }
 }
 
 function Match({match, getPredictionGoals, updateGoal}){
-    {
+    
         return(
         <div id= "match" className="card">
             <div className="card-header">
@@ -109,7 +98,7 @@ function Match({match, getPredictionGoals, updateGoal}){
         
         
         )
-    }
+    
 }
 
 export default Match

@@ -1,4 +1,4 @@
-import "../styles/Matches.css"
+import "../../styles/Matches.css"
 
 function Team({name, crest}){
     
