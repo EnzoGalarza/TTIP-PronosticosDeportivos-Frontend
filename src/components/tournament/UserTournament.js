@@ -63,7 +63,7 @@ const UserTournament = () => {
                 <Navbar/>
             </header>
             <div className="users-container">
-                <button className="btn btn-primary" onClick={() => updateScores()}><FontAwesomeIcon icon={faArrowsRotate} /> Actualizar resultados</button>
+                <button className="btn btn-primary refresh" onClick={() => updateScores()}><FontAwesomeIcon icon={faArrowsRotate} /> Actualizar resultados</button>
                 <DataTable
                 columns={columns}
                 data={userScoresData.userScores}

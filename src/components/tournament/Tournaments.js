@@ -48,7 +48,7 @@ const Tournaments = () => {
                         )}        
                     </Table> : 
                     <div className="tournaments-nodata"> 
-                        No se encuentra ningún torneo
+                        No estás participando de ningún torneo
                     </div> 
                 }
                 

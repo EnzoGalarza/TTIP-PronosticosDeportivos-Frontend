@@ -88,7 +88,7 @@ const Notifications = () => {
                         }        
                     </Table> :
                     <div className="notifications-nodata">
-                        No se encuentra ninguna notificación
+                        No tenés notificaciones
                     </div>
                 }
                 <div id="alertConfirm" className="alert alert-success confirm-delete">
