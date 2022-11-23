@@ -3,49 +3,28 @@ import { getTournamentScores, updateScoresInTournament } from "../../api/Request
 import { useParams } from 'react-router-dom';
 import Navbar from "../Navbar";
 import "../../styles/UserTournament.css"
-import DataTable from "react-data-table-component";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
+import PositionsTable from "./PositionsTable";
 
 const UserTournament = () => {
 
     const { tournamentId } = useParams();
 
-    const [userScoresData, setUserScoresData] = useState({
-        userScores: []
-    })
-
-    const columns = [
-        {
-            name: 'Nombre',
-            selector: 'user.name'
-        },
-        {
-            name: 'Puntaje',
-            selector: 'score'
-        },
-        {
-            name: 'Aciertos',
-            selector: 'hits'
-        },
-        {
-            name: 'Pronósticos evaluados',
-            selector: 'totalPronostics'
-        },
-        {
-            name: 'Porcentaje de aciertos',
-            selector: 'percentage'
+    const [tournamentResultsData, setTournamentResultsData] = useState({
+        tournamentResults: {
+            users: [],
+            finished: "",
         }
-    ]
+    })
 
     const updateUsersScores = () => {
         getTournamentScores(tournamentId)
         .then((response) => {
-            setUserScoresData({
-                userScores: response.data
+            setTournamentResultsData({
+                tournamentResults: response.data
             })
-            console.log("USERS",response)
-        }).catch((error) => {console.log(error)})
+        }).catch((error) => {console.log(error.response.data)})
     }
 
     const updateScores = () => {
@@ -65,11 +44,9 @@ const UserTournament = () => {
             </header>
             <div className="users-container">
                 <button className="btn btn-primary refresh" onClick={() => updateScores()}><FontAwesomeIcon icon={faArrowsRotate} /> Actualizar resultados</button>
-                <DataTable
-                columns={columns}
-                data={userScoresData.userScores}
-                title="Posiciones"
-                />
+                {tournamentResultsData.tournamentResults.finished ? 
+                 null :
+                 <PositionsTable userScores={tournamentResultsData.tournamentResults.users}/>}
             </div>
         </>
     )

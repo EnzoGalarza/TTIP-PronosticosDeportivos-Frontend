@@ -41,6 +41,7 @@ export const getUsers = (user) =>{
 }
 
 export const updateTournamentsData = (user) => {
+    console.log(`${urlBASE}/tournaments/${user}`)
     return axios.get(`${urlBASE}/tournaments/${user}`,getToken())
 }
 
