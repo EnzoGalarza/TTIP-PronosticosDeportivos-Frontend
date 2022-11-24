@@ -6,10 +6,13 @@ import "../../styles/UserTournament.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
 import PositionsTable from "./PositionsTable";
+import TournamentWinners from "./TournamentWinners";
 
 const UserTournament = () => {
 
     const { tournamentId } = useParams();
+
+    var positions
 
     const [tournamentResultsData, setTournamentResultsData] = useState({
         tournamentResults: {
@@ -43,10 +46,15 @@ const UserTournament = () => {
                 <Navbar/>
             </header>
             <div className="users-container">
-                <button className="btn btn-primary refresh" onClick={() => updateScores()}><FontAwesomeIcon icon={faArrowsRotate} /> Actualizar resultados</button>
                 {tournamentResultsData.tournamentResults.finished ? 
-                 null :
-                 <PositionsTable userScores={tournamentResultsData.tournamentResults.users}/>}
+                <TournamentWinners userScores={tournamentResultsData.tournamentResults.users} 
+                                   tournamentName={localStorage.getItem("tournamentName")}/> 
+                 :
+                 <>
+                    <button className="btn btn-primary refresh" onClick={() => updateScores()}><FontAwesomeIcon icon={faArrowsRotate} /> Actualizar resultados</button>
+                    <PositionsTable userScores={tournamentResultsData.tournamentResults.users}
+                                    tournamentName={localStorage.getItem("tournamentName")}/>
+                 </>}
             </div>
         </>
     )

@@ -1,3 +1,11 @@
 .tableHead{
     font-weight: bold;
 }
+
+.btn.btn-primary.positions{
+    margin: 20px;
+}
+
+.positionsTitle{
+    font-size: 40px;
+}

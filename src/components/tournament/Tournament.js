@@ -24,7 +24,8 @@ function Tournament({tournament}){
 
     const navigate = useNavigate(); 
 
-    const seeTournament = () => {
+    const seeTournament = (name) => {
+        localStorage.setItem("tournamentName", name)
         navigate(`/userTournament/${tournament.id}`)
     }
 
@@ -119,7 +120,7 @@ function Tournament({tournament}){
                     <td>{tournament.name}</td>
                     <td>{tournament.competition}</td>
                     
-                    <td><button onClick={() => seeTournament()}>Ver</button></td>
+                    <td><button onClick={() => seeTournament(tournament.name)}>Ver</button></td>
                     <td><button onClick={() => showUsers()}>Agregar usuarios</button></td>
                 </tr>    
             </tbody>
