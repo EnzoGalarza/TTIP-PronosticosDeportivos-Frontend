@@ -127,7 +127,7 @@ function Tournament({tournament}){
 
             <Modal id="UsersModal" data-refresh = "false" isOpen={usersModalState} toggle={() => showUsers([])}>
                 <ModalHeader className="modal-header">
-                        <span>
+                        <span className='inviteUsersTitle'>
                             Invitar usuarios
                         </span>
                         <span>

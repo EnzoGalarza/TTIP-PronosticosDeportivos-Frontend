@@ -19,6 +19,21 @@ const getPositionColor = (position) => {
     }
 }
 
+const getPositionNumber = (position) => {
+
+    switch (position){
+        case 1: case 2: case 3:
+            return( <MDBBadge color= {getPositionColor(position)} pill>
+                        {position}
+                    </MDBBadge>)
+        default:
+            return (<div className='position'>
+                        {position}
+                    </div>)
+    }
+
+}
+
 return(
     <>
         <div className='positionsTitle'>
@@ -41,9 +56,7 @@ return(
                 return(
                     <tr>
                         <td align ='middle'>
-                            <MDBBadge color= {getPositionColor(position)} pill>
-                                {position}
-                            </MDBBadge>
+                            {getPositionNumber(position)}
                         </td>
                         <td>
                             <div className='d-flex align-items-center'>

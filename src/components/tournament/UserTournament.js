@@ -12,8 +12,6 @@ const UserTournament = () => {
 
     const { tournamentId } = useParams();
 
-    var positions
-
     const [tournamentResultsData, setTournamentResultsData] = useState({
         tournamentResults: {
             users: [],

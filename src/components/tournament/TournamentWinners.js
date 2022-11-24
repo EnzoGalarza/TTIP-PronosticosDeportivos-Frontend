@@ -26,7 +26,9 @@ const TournamentWinners = ({userScores, tournamentName}) => {
             case 2:
                 return "silver"
             case 3:
-                return "#761414";
+                return "#761414"
+            default:
+                return "#761414"
         }
     }
 
@@ -34,28 +36,30 @@ const TournamentWinners = ({userScores, tournamentName}) => {
         <>
             { positionsData.positions ?
             <>
-                <button className="btn btn-primary positions" onClick={() => switchPositions()}><FontAwesomeIcon icon={faTrophy} /> Ganadores</button>
+                <button className="btn btn-primary winners" onClick={() => switchPositions()}><FontAwesomeIcon icon={faTrophy} /> Ganadores</button>
                 <PositionsTable userScores={userScores} tournamentName={tournamentName}/>
             </>
             :
-            <div className="winnersList">
-                <button className="btn btn-primary winners" onClick={() => switchPositions()}><FontAwesomeIcon icon={faRankingStar} /> Posiciones</button>
-                <span className="winnersTitle">
-                    Ganadores de {tournamentName}
-                </span>
-                {winners.map(winner =>{
-                    position = position + 1 
-                    return (
-                        <div className="winner">
-                            <FontAwesomeIcon className='medal' icon={faMedal} color={getMedalColor(position)} />
-                            <div className="winnerName">
-                                <p className='fw-bold mb-1'>{winner.user.name}</p>
-                                <p className='text-muted mb-0'>{winner.user.username}</p>
+            <>
+                <button className="btn btn-primary positions" onClick={() => switchPositions()}><FontAwesomeIcon icon={faRankingStar} /> Posiciones</button>
+                    <div className="winnersTitle">
+                        Ganadores de {tournamentName}
+                    </div>
+                <div className="winnersList">
+                    {winners.map(winner =>{
+                        position = position + 1 
+                        return (
+                            <div className="winner">
+                                <FontAwesomeIcon className='medal' icon={faMedal} color={getMedalColor(position)} />
+                                <div className="winnerName">
+                                    <p className='fw-bold mb-1'>{winner.user.name}</p>
+                                    <p className='text-muted mb-0'>{winner.user.username}</p>
+                                </div>
                             </div>
-                        </div>
-                    )
-                })}
-            </div>           
+                        )
+                    })}
+                </div> 
+            </>          
             }
         </>
     )

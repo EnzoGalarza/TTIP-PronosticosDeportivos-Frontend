@@ -10,7 +10,7 @@
 }
 
 .close{
-    margin-left: 305px;
+    margin-left: 300px;
 }
 
 .modal-header{
@@ -61,4 +61,8 @@
 .tournaments-nodata{
     text-align: center;
     font-size: calc(10px + 2vmin);
+}
+
+.inviteUsersTitle{
+    font-weight: bold;
 }

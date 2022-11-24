@@ -6,14 +6,28 @@
 .winner{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content:left;
     font-size: 20px;
+    margin-left: 37%;
 }
 
 .winnersTitle{
+    width: 100%;
     font-size: 40px;
+    padding: 5px;
+    display: flex;
+    justify-content:center;
 }
 
 .btn.btn-primary.winners{
     margin: 20px;
+    float: right;
+}
+
+.btn.btn-primary.positions{
+    margin: 20px;
+    margin-right: 125px;
+    position: absolute;
+    left: 1;
+    right: 0;
 }
