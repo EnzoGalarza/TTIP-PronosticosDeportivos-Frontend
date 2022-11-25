@@ -46,12 +46,14 @@ const UserTournament = () => {
             <div className="users-container">
                 {tournamentResultsData.tournamentResults.finished ? 
                 <TournamentWinners userScores={tournamentResultsData.tournamentResults.users} 
-                                   tournamentName={localStorage.getItem("tournamentName")}/> 
+                                   tournamentName={localStorage.getItem("tournamentName")}
+                                   tournamentId ={tournamentId}/> 
                  :
                  <>
                     <button className="btn btn-primary refresh" onClick={() => updateScores()}><FontAwesomeIcon icon={faArrowsRotate} /> Actualizar resultados</button>
                     <PositionsTable userScores={tournamentResultsData.tournamentResults.users}
-                                    tournamentName={localStorage.getItem("tournamentName")}/>
+                                    tournamentName={localStorage.getItem("tournamentName")}
+                                    tournamentId ={tournamentId}/>
                  </>}
             </div>
         </>

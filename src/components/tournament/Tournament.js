@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import $ from "jquery";
 import "../../styles/Tournaments.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan, faRankingStar, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 function Tournament({tournament}){
 
@@ -115,15 +115,28 @@ function Tournament({tournament}){
 
     return(
         <>
-            <tbody>
-                <tr>    
-                    <td>{tournament.name}</td>
-                    <td>{tournament.competition}</td>
-                    
-                    <td><button onClick={() => seeTournament(tournament.name)}>Ver</button></td>
-                    <td><button onClick={() => showUsers()}>Agregar usuarios</button></td>
-                </tr>    
-            </tbody>
+            <tr>    
+                <td align ='middle'>
+                    <p className='fw-bold mb-1'>{tournament.name}</p>
+                </td>
+                <td align ='middle' className='tournamentCompetitionName'>
+                    <div className='d-flex align-items-center'>
+                        <img
+                        src={tournament.emblem}
+                        alt=''
+                        style={{ width: '45px', height: '45px' }}
+                        className='rounded-circle'
+                        />
+                        <div className='ms-3'>
+                            {tournament.competitionName}
+                        </div>
+                    </div>
+                </td>
+                
+                <td align ='middle'><button className='btn btn-primary' onClick={() => seeTournament(tournament.name)}><FontAwesomeIcon icon={faRankingStar} /></button></td>
+                <td align ='middle'><button className='btn btn-primary' onClick={() => seeTournament(tournament.name)}><FontAwesomeIcon icon={faUserPlus} /></button></td>
+            </tr>  
+            
 
             <Modal id="UsersModal" data-refresh = "false" isOpen={usersModalState} toggle={() => showUsers([])}>
                 <ModalHeader className="modal-header">

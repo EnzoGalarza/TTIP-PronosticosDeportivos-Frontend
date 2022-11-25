@@ -3,7 +3,7 @@ import { updateTournamentsData } from "../../api/Requests";
 import Navbar from "../Navbar";
 import '../../styles/Tournaments.css'
 import Tournament from "./Tournament";
-import Table from 'react-bootstrap/Table';
+import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 
 const Tournaments = () => {
 
@@ -16,7 +16,6 @@ const Tournaments = () => {
         .then((response) => {
             setTournamentsData({
                 tournaments: response.data
-
             })
         }).catch((error) => {console.log(error)})
     };
@@ -34,19 +33,22 @@ const Tournaments = () => {
             </header>
             <div className="tournaments-table-container">
                 {tournamentsData.tournaments.length > 0 ? 
-                    <Table className="tournaments-table" responsive="sm" striped hover bordered size="sm">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Competición</th>
-                                <th>Ver torneo</th>
-                                <th>Agregar usuarios</th>
-                            </tr>   
-                        </thead>     
-                        {tournamentsData.tournaments.map(tournament => 
-                            <Tournament key={tournament.id} tournament={tournament}/>
-                        )}        
-                    </Table> : 
+                    <MDBTable align='middle'>
+                        <MDBTableHead>
+                            <tr className='tableHead'>
+                                <td align ='middle'>Nombre</td>
+                                <td align ='middle'>Competición</td>
+                                <td align ='middle'>Puntuación</td>
+                                <td align ='middle'>Agregar usuarios</td>
+                            </tr>
+                        </MDBTableHead>
+                        <MDBTableBody>
+                            {tournamentsData.tournaments.map(tournament => 
+                                <Tournament key={tournament.id} tournament={tournament}/>
+                            )}  
+                        </MDBTableBody>
+                    </MDBTable>
+                    :
                     <div className="tournaments-nodata"> 
                         No estás participando de ningún torneo
                     </div> 

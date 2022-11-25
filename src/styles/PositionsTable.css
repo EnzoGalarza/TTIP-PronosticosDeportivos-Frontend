@@ -5,9 +5,17 @@
 .positionsTitle{
     font-size: 40px;
     padding: 15px;
-    padding-top: 18px;
+    padding-top: 20px;
 }
 
 .position{
+    font-weight: bold;
+}
+
+.btn.btn-primary.criteria{
+    float: right;
+}
+
+.tournamentCriteriasTitle{
     font-weight: bold;
 }

@@ -4,7 +4,7 @@ import { faMedal, faRankingStar, faTrophy } from '@fortawesome/free-solid-svg-ic
 import PositionsTable from "./PositionsTable";
 import "../../styles/TournamentWinners.css"
 
-const TournamentWinners = ({userScores, tournamentName}) => {
+const TournamentWinners = ({userScores, tournamentName, tournamentId}) => {
 
     const [positionsData, setPositionsData] = useState({
         positions: false
@@ -37,7 +37,7 @@ const TournamentWinners = ({userScores, tournamentName}) => {
             { positionsData.positions ?
             <>
                 <button className="btn btn-primary winners" onClick={() => switchPositions()}><FontAwesomeIcon icon={faTrophy} /> Ganadores</button>
-                <PositionsTable userScores={userScores} tournamentName={tournamentName}/>
+                <PositionsTable userScores={userScores} tournamentName={tournamentName} tournamentId={tournamentId}/>
             </>
             :
             <>
