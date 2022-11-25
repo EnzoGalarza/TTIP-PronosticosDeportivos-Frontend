@@ -1,10 +1,27 @@
-.confirm-delete{
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .notifications-nodata{
     text-align: center;
     font-size: calc(10px + 2vmin);
+}
+
+.notifications{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.notificationMessage{
+    margin-left: 30%;
+    margin-top: 20px;
+    width: 350px;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.accept{
+    margin-top: 8px;
+    margin-right: 8px;
+}
+
+.reject{
+    margin-top: 8px;
 }

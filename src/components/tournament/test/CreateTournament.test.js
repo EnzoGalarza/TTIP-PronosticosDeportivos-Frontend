@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom"
 import { getCompetitions } from "../../../api/Requests"
-import { render, screen, waitFor} from '@testing-library/react'
+import { render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import CreateTournament from '../CreateTournament'

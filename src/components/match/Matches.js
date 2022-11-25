@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Select from "react-select";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import $ from "jquery";
 
 const Matches = () => {
 
@@ -24,6 +25,8 @@ const Matches = () => {
     })
 
     const [predictionsData, setPredictionsData] = useState(predictions)
+
+    const [predictionsConfirm, setPredictionsConfirm] = useState("")
 
     const updatePredictions = () => {
         getPredictions(localStorage.getItem("user"),compId)
@@ -120,7 +123,8 @@ const Matches = () => {
     const savePredictions = () =>{
         savePronostics(predictionsData)
             .then((response) =>{ 
-                console.log(response.data)}
+                showConfirmation("¡Pronósticos guardados!")
+            }
             )
             .catch((error) =>{ 
                 console.log(error)}
@@ -142,7 +146,15 @@ const Matches = () => {
         updateMatches(event.value)
     };
 
+    const showConfirmation = (message) => {
+        setPredictionsConfirm(message)
+        $('#alertConfirm').fadeTo(2000, 500).slideUp(500, () => {
+            $('#alertConfirm').slideUp(500)
+        })
+    }
+
     useEffect(() => {
+        $('#alertConfirm').hide()
         updateMatchesData();
         updatePredictions();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -179,6 +191,9 @@ const Matches = () => {
                     <Button color="primary" id="saveBtn" type="button" className="savePredictionsBtn" onClick={() => savePredictions()}>
                         Guardar pronósticos
                     </Button>
+                    <div id="alertConfirm" className="alert alert-success predictions-confirm" role="alert">
+                        {predictionsConfirm}
+                    </div>
                 </nav>
             </div>
             

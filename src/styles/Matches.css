@@ -74,3 +74,9 @@ img.teamCrest{
 #saveBtn{
     margin-left: 10px;
 }
+
+.alert.alert-success.predictions-confirm{
+    position: fixed;
+    margin-left: 10px;
+    margin-top: 45px;
+}

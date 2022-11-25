@@ -3,7 +3,6 @@ import "../../styles/Notifications.css"
 import '../../styles/index.css'
 import { getNotifications, confirmInvitation, deleteNotification } from "../../api/Requests"
 import Navbar from '../Navbar';
-import { Table } from 'react-bootstrap';
 import Notification from './Notification';
 import { useNavigate } from "react-router-dom";
 import $ from "jquery";
@@ -74,19 +73,15 @@ const Notifications = () => {
             </header>
             <div className="tournaments-table-container">
                 {userNotificationsData.notifications.length > 0 ?
-                    <Table className="tournaments-table" responsive="sm" striped hover bordered size="sm">
-                        <thead>
-                            <tr>
-                                <th>Mensaje</th>
-                                <th>Aceptar</th>
-                                <th>Rechazar</th>
-                            </tr>   
-                        </thead>     
-                        {userNotificationsData.notifications.map(notification => 
-                            <Notification key={notification.id} tournamentId={notification.tournamentId} id={notification.id} message={notification.message} 
-                                            acceptable={notification.acceptable} acceptInvitation={acceptInvitation} declineInvitation={declineInvitation}/>)                                        
-                        }        
-                    </Table> :
+                    <>
+                        {userNotificationsData.notifications.map(notification =>{
+                            return(
+                                <Notification key={notification.id} tournamentId={notification.tournamentId} id={notification.id} message={notification.message} 
+                                              acceptable={notification.acceptable} acceptInvitation={acceptInvitation} declineInvitation={declineInvitation}/>
+                            )
+                        })}
+                    </>
+                    :
                     <div className="notifications-nodata">
                         No tenés notificaciones
                     </div>

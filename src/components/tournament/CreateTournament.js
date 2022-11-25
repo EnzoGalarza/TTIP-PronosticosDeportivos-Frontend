@@ -5,6 +5,7 @@ import "../../styles/CreateTournament.css";
 import Navbar from "../Navbar";
 import Select from "react-select";
 import NumericInput from 'react-numeric-input'
+import $ from "jquery";
 
 
 const CreateTournament = () => {
@@ -26,6 +27,8 @@ const CreateTournament = () => {
         criteria: []
     })
 
+    const [error, setError] = useState("")
+
     const navigate = useNavigate()
 
     const [competitionsData, setCompetitionsData] = useState({
@@ -35,6 +38,13 @@ const CreateTournament = () => {
     const [competitionPicture, setCompetitionPicture] = useState({
         image: ''
     })
+
+    const showError = (message) => {
+        setError(message)
+        $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
+            $('#alertReg').slideUp(500)
+        })
+    }
 
     const updateCompetitions = () => {
         getCompetitions()
@@ -50,7 +60,7 @@ const CreateTournament = () => {
                 image: response.data[0].emblem
             })
         })
-        .catch((error) => {console.log(error)})
+        .catch((error) => {showError(error.response.data)})
     }
 
     const createTournament = () => {
@@ -61,7 +71,7 @@ const CreateTournament = () => {
                 }
             )
             .catch((error) => {
-                console.log('Error de creación de torneo: ', error.response.data)
+                showError(error.response.data)
             }) 
     }
 
@@ -142,7 +152,7 @@ const CreateTournament = () => {
     }
 
     useEffect(() => {
-        
+        $('#alertReg').hide()
         updateCompetitions();
         setTournamentData({
             ...tournamentData,
@@ -218,6 +228,9 @@ const CreateTournament = () => {
                 )} 
                 <div className="createButton">        
                     <button onClick={() => handleCreate()} type="submit" className="btn btn-primary create">Crear</button>
+                </div>
+                <div id= "alertReg" className="alert alert-danger createTournament-error" role="alert">
+                    {error}
                 </div>
             </div> 
         </>    
