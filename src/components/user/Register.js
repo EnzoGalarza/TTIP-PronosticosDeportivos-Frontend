@@ -9,10 +9,6 @@ import genericprofile from '../../images/genericprofile.jpg';
 
 const RegisterUser = () => {
 
-    useEffect(() => {
-        $('#alertReg').hide()
-      }, []);
-
     const navigate = useNavigate();
 
     const [data, setData] = useState({
@@ -69,6 +65,7 @@ const RegisterUser = () => {
     };
 
     useEffect(() => {
+        $('#alertReg').hide()
     },[]);
     
     const handleSubmit = (event) => {
@@ -103,14 +100,15 @@ const RegisterUser = () => {
                 <Navbar />
             </header>
             <form className="Register-main" onSubmit={handleSubmit}>
-                <div id= "alertReg" className="alert alert-danger" role="alert">
+                <div data-testid="register-error" id= "alertReg" className="alert alert-danger" role="alert">
                     {error}
                 </div>
-                <h1 id="RegisterTitle">
+                <h1 data-testid="register-title" id="RegisterTitle">
                     Registrarme
                 </h1>
-                <img id="ProfilePicture" src={data.image} alt="user"/>
+                <img data-testid="register-img" id="ProfilePicture" src={data.image} alt="user"/>
                 <input 
+                    data-testid="register-name"
                     id="RegisterNameInput" 
                     name = "name"
                     className="registerInput" 
@@ -119,7 +117,8 @@ const RegisterUser = () => {
                     value={data.name}
                     onChange={handleInputChange}
                 />
-                <input 
+                <input
+                    data-testid="register-email" 
                     id="RegisterEmailInput" 
                     name = "email"
                     className="registerInput" 
@@ -129,6 +128,7 @@ const RegisterUser = () => {
                     onChange={handleInputChange}
                 /> 
                 <input 
+                    data-testid="register-password"
                     id="RegisterPassInput" 
                     name="password"
                     className="registerInput" 
@@ -148,6 +148,7 @@ const RegisterUser = () => {
                 />
                 <label id="SelectLabel" for="image">Elegí tu foto de perfil</label>
                 <input
+                    data-testid="image-selector"
                     id="RegisterImageInput"
                     name="image"
                     className="registerInput"
@@ -156,6 +157,7 @@ const RegisterUser = () => {
                     accept="image/*"
                 />
                 <button 
+                    data-testid="register-button"
                     id="RegisterBtn" 
                     type="submit" 
                     className="btn btn-primary">

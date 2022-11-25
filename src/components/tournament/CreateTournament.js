@@ -183,8 +183,9 @@ const CreateTournament = () => {
                 <div className="pictureContainer">
                     <img alt="competition" className="competitionPicture" id="CompetitionPicture" src={competitionPicture.image}/>
                 </div>
-                <div className="select-criteria">
+                <div data-testid="criteria-selection" className="select-criteria">
                     <Select
+                            aria-label='Criterios'
                             data-testid="criteria-selection"
                             className="criteriaSelection"
                             classNamePrefix="select"
@@ -201,7 +202,7 @@ const CreateTournament = () => {
                         />
                 </div>
                 {criteriaSelectionData.length > 0 &&
-                <div className='criteriaItemTitle'>
+                <div data-testid="criterio-tournament" className='criteriaItemTitle'>
                     <span>Criterio</span> <span>Puntaje</span>
                 </div>}
                 {criteriaSelectionData.map(selectionCriteria => 

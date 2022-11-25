@@ -62,18 +62,19 @@ const Login = () => {
                 <Navbar />
             </header>
             <div className="register">
-                <span id="RegisterTxt">
+                <span data-testid="register-text" id="RegisterTxt">
                     ¿No tenés tu cuenta aún?
                 </span>
-                <button id="RegisterBtn" type="button" className="btn btn-link" onClick={register}>
+                <button data-testid="register-button" id="RegisterBtn" type="button" className="btn btn-link" onClick={register}>
                     Registrarme
                 </button>
             </div>
             <form className="Login-main" onSubmit={handleSubmit}>
-                <h1 id="LoginTitle">
+                <h1 data-testid="login-title" id="LoginTitle">
                     Ingresá
                 </h1>
                 <input 
+                    data-testid="login-email"
                     id="LoginUserInput" 
                     name="username"
                     className="input" 
@@ -83,6 +84,7 @@ const Login = () => {
                     onChange={handleInputChange}
                 />
                 <input 
+                    data-testid="login-password"
                     id="LoginPassInput" 
                     name="password"
                     className="input" 
@@ -91,10 +93,10 @@ const Login = () => {
                     value={data.password}
                     onChange={handleInputChange}
                 /> 
-                <button  type="submit" className="btn btn-primary">
+                <button data-testid="login-button" type="submit" className="btn btn-primary">
                     Log in
                 </button>
-                <div id= "alertLogin" className="alert alert-danger" role="alert">
+                <div data-testid="login-error" id= "alertLogin" className="alert alert-danger" role="alert">
                     {error}
                 </div>
             </form>

@@ -47,7 +47,7 @@ const matchStatusFormatter = (input) => {
 }
 
 function Match({match, getPredictionGoals, updateGoal}){
-    
+        console.log("Update goal: ", updateGoal)
         return(
         <div id= "match" className="card">
             <div className="card-header">
@@ -56,7 +56,7 @@ function Match({match, getPredictionGoals, updateGoal}){
 
             <div id= "matchBody" className="card-body">
                 <Team name={match.homeTeam.name} crest={match.homeTeam.crest}/>    
-                <div className="goals">
+                <div data-testid="goals" className="goals">
                         {match.status === "FINISHED" ? 
                         <div className="result">
                             Resultado: <br></br>
@@ -64,12 +64,12 @@ function Match({match, getPredictionGoals, updateGoal}){
                             <br></br>
                             {getPredictionGoals(match.id, "HOME") !== null &&
                              getPredictionGoals(match.id, "AWAY") !== null ?
-                                <div>
+                                <div data-testid="pronostic">
                                     Tu Pronóstico: <br></br>
                                     {getPredictionGoals(match.id, "HOME")} - {getPredictionGoals(match.id, "AWAY")}
                                 </div>
                                 : 
-                                <div>
+                                <div data-testid="pronostic">
                                     Sin pronosticar
                                 </div>
                             }
@@ -77,6 +77,7 @@ function Match({match, getPredictionGoals, updateGoal}){
                         : 
                         <div className="prediction">
                             <NumericInput 
+                                      data-testid="local-pronostic"
                                       min={0} 
                                       value={getPredictionGoals(match.id, "HOME")}
                                       className="localResInput"
@@ -84,6 +85,7 @@ function Match({match, getPredictionGoals, updateGoal}){
                                       onChange={value => updateGoal(match, "HOME", value)}
                                       />
                             <NumericInput 
+                                      data-testid="away-pronostic"
                                       min={0}
                                       value={getPredictionGoals(match.id, "AWAY")}
                                       className="awayResInput"
