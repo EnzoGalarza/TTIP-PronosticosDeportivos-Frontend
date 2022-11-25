@@ -49,7 +49,7 @@ const updatePrediction = (match, team, goals) => {
 
 describe('Match', () => {
     it('Match nombreLocal, imgLocal, nombreVisitante, imgVisitante, goles y pronóstico', async () => {
-        render(<Match match={mockMatchFinished()} getPredictionGoals={mockPredictionGoals}/>)
+        render(<Match match={mockMatchFinished()} updateGoal={updatePrediction} getPredictionGoals={mockPredictionGoals}/>)
         
         const teams = screen.getAllByTestId("team")
         const local = teams[0]
@@ -67,13 +67,13 @@ describe('Match', () => {
     })
 
     it('Partido finalizado sin pronóstico', async () => {
-        render(<Match match={mockMatchFinished()} getPredictionGoals={mockNotPrediction}/>)
+        render(<Match match={mockMatchFinished()} updateGoal={updatePrediction} getPredictionGoals={mockNotPrediction}/>)
 
         expect(screen.getByTestId("pronostic")).toHaveTextContent("Sin pronosticar")
     })
 
     it('Partido sin comenzar se visualiza para pronosticar', async () => {
-        render(<Match match={mockMatchNotStarted()} getPredictionGoals={() => {return null}}/>) 
+        render(<Match match={mockMatchNotStarted()} updateGoal={updatePrediction} getPredictionGoals={() => {return null}}/>) 
 
         const localPronostic = screen.getByTestId("local-pronostic")
         const awayPronostic = screen.getByTestId("away-pronostic")

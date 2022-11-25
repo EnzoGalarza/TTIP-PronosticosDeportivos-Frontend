@@ -131,7 +131,6 @@ describe('Create Tournament', () => {
         expect(await screen.findByTestId("criterio-tournament")).toBeInTheDocument()
         
         
-        
     })
 
     

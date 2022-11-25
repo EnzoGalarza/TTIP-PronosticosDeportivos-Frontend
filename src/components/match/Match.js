@@ -47,7 +47,6 @@ const matchStatusFormatter = (input) => {
 }
 
 function Match({match, getPredictionGoals, updateGoal}){
-        console.log("Update goal: ", updateGoal)
         return(
         <div id= "match" className="card">
             <div className="card-header">
