@@ -134,7 +134,7 @@ function Tournament({tournament}){
                 </td>
                 
                 <td align ='middle'><button className='btn btn-primary' onClick={() => seeTournament(tournament.name)}><FontAwesomeIcon icon={faRankingStar} /></button></td>
-                <td align ='middle'><button className='btn btn-primary' onClick={() => seeTournament(tournament.name)}><FontAwesomeIcon icon={faUserPlus} /></button></td>
+                <td align ='middle'><button className='btn btn-primary' onClick={() => showUsers()}><FontAwesomeIcon icon={faUserPlus} /></button></td>
             </tr>  
             
 

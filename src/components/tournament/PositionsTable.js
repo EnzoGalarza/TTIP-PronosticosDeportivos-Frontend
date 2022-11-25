@@ -7,7 +7,6 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {getCriterias} from "../../api/Requests";
 import Popover from 'react-bootstrap/Popover';
-import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 const PositionsTable = ({userScores, tournamentName, tournamentId}) => {
@@ -18,15 +17,55 @@ const [criteriasData, setCriteriasData] = useState({
     criterias : []
 })
 
-const popover = (
-    <Popover id="popover-basic">
-      <Popover.Header as="h3">Popover right</Popover.Header>
-      <Popover.Body>
-        And here's some <strong>amazing</strong> content. It's very engaging.
-        right?
-      </Popover.Body>
-    </Popover>
-  );
+const getCriteriaName = (criteriaName) =>{
+
+    switch (criteriaName){
+
+        case "Complete":
+            return "Resultado completo"
+        case "Partial":
+            return "Resultado parcial"
+        case "Approach":
+            return "Acercamiento"
+        case "WinnerOrTie":
+            return "Ganador"
+        default:
+            return ""
+
+    }
+
+}
+
+const getCriteriaText = (criteriaName) =>{
+
+    switch (criteriaName){
+
+        case "Complete":
+            return "Se debe acertar el resultado exacto del partido."
+        case "Partial":
+            return "Se deben acertar los goles de al menos uno de los equipos."
+        case "Approach":
+            return "Ambos resultados pronosticados deben tener una diferencia menor o igual a 2 " +
+                   "del resultado final del partido."
+        case "WinnerOrTie":
+            return "Se debe acertar al ganador, o el empate en caso de producirse."
+        default:
+            return ""
+
+    }
+
+}
+
+const popover = (criteriaName) =>{
+    return(
+        <Popover id="popover-basic">
+            <Popover.Header as="h3">{getCriteriaName(criteriaName)}</Popover.Header>
+            <Popover.Body>
+                {getCriteriaText(criteriaName)}
+            </Popover.Body>
+        </Popover>
+    )
+}
 
 var position = 0
 
@@ -132,7 +171,7 @@ return(
             </MDBTableBody>
         </MDBTable>
 
-        <Modal id="CriteriasModal" data-refresh = "false" isOpen={criteriasModalState} toggle={() => showCriterias([])}>
+        <Modal id="CriteriasModal" data-refresh = "false" isOpen={criteriasModalState} toggle={() => showCriterias()}>
             <ModalHeader className="modal-header">
                     <span className='tournamentCriteriasTitle'>
                         Criterios
@@ -142,17 +181,25 @@ return(
                 {criteriasData.criterias.map(criteria => {
                     return(
                         <div className='tournamentCriteria'>
-                            <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-                                <Button variant="success">Click me to see</Button>
+                            <td className='tournamentCriteriaName'>
+                                {getCriteriaName(criteria.name)}
+                            </td>
+                            <td className='tournamentCriteriaScore'>
+                                {criteria.score} pts
+                            </td>
+                            <OverlayTrigger trigger="click" placement="right" overlay={popover(criteria.name)}>
+                                <div className='seeCriteriaDescription'>
+                                    <button className='btn btn-success seeCriteriaDescription'><FontAwesomeIcon icon={faEye} /></button>
+                                </div>
                             </OverlayTrigger>
-                            {criteria.name}
-                            {criteria.score}
                         </div>
                     )    
                 })}
             </ModalBody>
             <ModalFooter className="modal-footer">
-
+            <div className='closeCriteriasModal'>
+                <button className="btn btn-secondary closeCriteriasModal" onClick={() => showCriterias()}>Cerrar</button>
+            </div>
             </ModalFooter>
         </Modal>
     </>
