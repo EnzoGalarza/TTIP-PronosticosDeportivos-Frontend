@@ -9,7 +9,6 @@ import { act } from "react-dom/test-utils"
 jest.mock('../../../api/Requests')
 
 describe('Create Tournament', () => {
-    
 
     it('estado inicial create tournament', async () => {
         const mockedCompetitions = {data: [{name: 'Serie A', code: 'SA'},{name: 'Primera Division', code: 'PD'}]}
@@ -21,25 +20,26 @@ describe('Create Tournament', () => {
                 </Routes>
             </BrowserRouter>)
         
-        const tournamentName = screen.getByTestId('tournament-name')
-        const tournamentTitle = screen.getByTestId('tournament-title')
-        const createButton = screen.getByRole('button')
+        const tournamentName = await screen.findByTestId('tournament-name')
+        const tournamentTitle = await screen.findByTestId('tournament-title')
+        const createButton = await screen.findByRole('button')
         
         expect(tournamentName).toHaveTextContent('')
         expect(tournamentTitle).toHaveTextContent('Nuevo torneo')
         expect(createButton).toHaveTextContent('Crear')
     })
-    
-    it('cambio nombre de torneo', () =>{
+
+    it('cambio nombre de torneo', async () =>{
         const mockedCompetitions = {data: [{name: 'Serie A', code: 'SA'},{name: 'Primera Division', code: 'PD'}]}
         getCompetitions.mockResolvedValue(mockedCompetitions)
+        act
         render(<BrowserRouter>
             <Routes>
                 <Route path="*" element={<CreateTournament/>}/>
             </Routes>
         </BrowserRouter>)
 
-        const tournamentName = screen.getByTestId('tournament-name')
+        const tournamentName = await screen.findByTestId('tournament-name')
         
         userEvent.type(tournamentName, 'Torneo nuevo')
         
@@ -56,11 +56,11 @@ describe('Create Tournament', () => {
             </Routes>
         </BrowserRouter>)
 
-        await waitFor(() => {
-            let options = screen.getAllByTestId('competition-option')
-            expect(options[0].selected).toBeTruthy()
-            expect(options[1].selected).toBeFalsy()
-        })
+        
+        let options = await screen.findAllByTestId('competition-option')
+        expect(options[0].selected).toBeTruthy()
+        expect(options[1].selected).toBeFalsy()
+        
         
         
     })
@@ -75,12 +75,13 @@ describe('Create Tournament', () => {
         </BrowserRouter>)
         
 
-        await waitFor(() => {
-            userEvent.selectOptions(screen.getByTestId('competition'), 'PD')
-            let options = screen.getAllByTestId('competition-option')
-            expect(options[0].selected).toBeFalsy()
-            expect(options[1].selected).toBeTruthy()
-        })
+        const select = await screen.findByTestId('competition')
+        let options = await screen.findAllByTestId('competition-option')
+        
+        userEvent.selectOptions(select, 'PD')
+        expect(options[0].selected).toBeFalsy()
+        expect(options[1].selected).toBeTruthy()
+        
         
         
     })
@@ -95,17 +96,17 @@ describe('Create Tournament', () => {
         </BrowserRouter>)
         
 
-        await waitFor(() => {
-            let select = screen.getByLabelText(/Criterios/i)
-            
-            userEvent.click(select)
-            
-            expect(screen.getByText("Resultado completo")).toBeInTheDocument()
-            expect(screen.getByText("Resultado parcial")).toBeInTheDocument()
-            expect(screen.getByText("Acercamiento")).toBeInTheDocument()
-            expect(screen.getByText("Ganador")).toBeInTheDocument()
-            expect(screen.queryByTestId("criterio-tournament")).not.toBeInTheDocument()
-        })
+        
+        let select = await screen.findByLabelText(/Criterios/i)
+        
+        userEvent.click(select)
+        
+        expect(screen.getByText("Resultado completo")).toBeInTheDocument()
+        expect(screen.getByText("Resultado parcial")).toBeInTheDocument()
+        expect(screen.getByText("Acercamiento")).toBeInTheDocument()
+        expect(screen.getByText("Ganador")).toBeInTheDocument()
+        expect(screen.queryByTestId("criterio-tournament")).not.toBeInTheDocument()
+        
         
         
     })
@@ -120,16 +121,18 @@ describe('Create Tournament', () => {
         </BrowserRouter>)
         
 
-        await waitFor(() => {
-            let select = screen.getByLabelText(/Criterios/i)
+        
+        let select = await screen.findByLabelText(/Criterios/i)
             
-            userEvent.click(select)
+        userEvent.click(select)
             
-            userEvent.click(screen.getByText("Resultado completo"))
+        userEvent.click(await screen.findByText("Resultado completo"))
             
-            expect(screen.queryByTestId("criterio-tournament")).toBeInTheDocument()
-        })
+        expect(await screen.findByTestId("criterio-tournament")).toBeInTheDocument()
+        
         
         
     })
+
+    
 })

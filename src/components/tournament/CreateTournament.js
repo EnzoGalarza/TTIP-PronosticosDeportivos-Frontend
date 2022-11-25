@@ -206,7 +206,7 @@ const CreateTournament = () => {
                     <span>Criterio</span> <span>Puntaje</span>
                 </div>}
                 {criteriaSelectionData.map(selectionCriteria => 
-                    <div className="criteriaItem">
+                    <div key={selectionCriteria.label} className="criteriaItem">
                         {selectionCriteria.label}
                         <NumericInput 
                                   min={1}
