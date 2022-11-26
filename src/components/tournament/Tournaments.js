@@ -4,12 +4,30 @@ import Navbar from "../Navbar";
 import '../../styles/Tournaments.css'
 import Tournament from "./Tournament";
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import $ from "jquery";
 
 const Tournaments = () => {
+
+    const [error, setError] = useState("")
 
     const [tournamentsData, setTournamentsData] = useState({
         tournaments : []
     })
+
+    const showError = (message) => {
+        setError(message)
+        $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
+            $('#alertReg').slideUp(500)
+        })
+    }
+
+    const catchError = (error) => {
+        if(error.response.data){
+            showError(error.response.data)
+        } else {
+            showError("Falló la conexión con el servidor")
+        }
+    }
 
     const updateTournaments = () => {
         updateTournamentsData(localStorage.getItem("userId"))
@@ -17,12 +35,11 @@ const Tournaments = () => {
             setTournamentsData({
                 tournaments: response.data
             })
-        }).catch((error) => {console.log(error)})
+        }).catch((error) => {catchError(error)})
     };
 
-    
-
     useEffect(() => {
+        $('#alertReg').hide()
         updateTournaments()
     },[]);
 
@@ -54,8 +71,12 @@ const Tournaments = () => {
                     </div> 
                 }
                 
-            </div>    
+            </div>
+            <div id= "alertReg" className="alert alert-danger tournaments-error" role="alert">
+                {error}
+            </div>
         </div>
+        
     )
 }
 

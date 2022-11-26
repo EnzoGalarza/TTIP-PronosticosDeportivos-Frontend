@@ -11,11 +11,28 @@ const Notifications = () => {
 
     const navigate = useNavigate(); 
 
+    const [error, setError] = useState("")
+
     const [userNotificationsData, setUserNotificationsData] = useState({
         notifications: []
     })
 
     const [confirmation, setConfirmation] = useState("")
+
+    const catchError = (error) => {
+        if(error.response.data){
+            showError(error.response.data)
+        } else {
+            showError("Falló la conexión con el servidor")
+        }
+    }
+
+    const showError = (message) => {
+        setError(message)
+        $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
+            $('#alertReg').slideUp(500)
+        })
+    }
 
     const updateNotifications = () => {
         getNotifications(localStorage.getItem("userId"))
@@ -24,7 +41,7 @@ const Notifications = () => {
                 notifications: response.data
             })    
         })
-        .catch((error) => {console.log(error)})
+        .catch((error) => {catchError(error)})
     }
 
     const hide = () => {
@@ -88,7 +105,10 @@ const Notifications = () => {
                 <div id="alertConfirm" className="alert alert-success confirm-delete">
                     {confirmation}
                 </div>
-            </div>    
+                <div id= "alertReg" className="alert alert-danger notifications-error" role="alert">
+                    {error}
+                </div>
+            </div>
         </div>
     )
 }

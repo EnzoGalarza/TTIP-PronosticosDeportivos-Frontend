@@ -28,13 +28,32 @@ const Matches = () => {
 
     const [predictionsConfirm, setPredictionsConfirm] = useState("")
 
+    const [error, setError] = useState("")
+
+    const showError = (message) => {
+        setError(message)
+        $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
+            $('#alertReg').slideUp(500)
+        })
+    }
+
+    const catchError = (error) => {
+        if(error.response.data){
+            showError(error.response.data)
+        } else {
+            showError("Falló la conexión con el servidor")
+        }
+    }
+
     const updatePredictions = () => {
         getPredictions(localStorage.getItem("user"),compId)
         .then((response) => {
             setPredictionsData(
                 response.data
             )
-        }).catch((error) => {console.log(error)})
+        }).catch((error) => {
+            catchError(error)
+        })
     };
 
     const updateMatches = (matchDay) => {
@@ -44,7 +63,9 @@ const Matches = () => {
                 matches: response.data
             })
         })
-        .catch((error) => {console.log(error)})
+        .catch((error) => {
+            catchError(error)
+        })
     };
     
     const updateMatchesData = () => {
@@ -53,7 +74,9 @@ const Matches = () => {
             updateMatchDayOptions(response.data)
             updateMatches(response.data);
         })
-        .catch((error) => {console.log(error)})
+        .catch((error) => {
+            catchError(error)
+        })
     };
 
     const findPrediction = (code) => {
@@ -127,7 +150,8 @@ const Matches = () => {
             }
             )
             .catch((error) =>{ 
-                console.log(error)}
+                catchError(error)
+            }
             )
     };
 
@@ -154,6 +178,7 @@ const Matches = () => {
     }
 
     useEffect(() => {
+        $('#alertReg').hide()
         $('#alertConfirm').hide()
         updateMatchesData();
         updatePredictions();
@@ -185,7 +210,9 @@ const Matches = () => {
                         />
                     </div>
                     {matchesData.matches.map(match => <Match match={match} getPredictionGoals={getPredictionGoals} updateGoal={updateGoal}/>)}
-                    
+                    <div id= "alertReg" className="alert alert-danger matches-error" role="alert">
+                        {error}
+                    </div>
                 </div>
                 <nav>
                     <Button color="primary" id="saveBtn" type="button" className="savePredictionsBtn" onClick={() => savePredictions()}>
@@ -196,7 +223,6 @@ const Matches = () => {
                     </div>
                 </nav>
             </div>
-            
         </>
         
     )

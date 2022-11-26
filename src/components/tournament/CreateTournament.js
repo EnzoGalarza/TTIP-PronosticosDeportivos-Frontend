@@ -39,6 +39,14 @@ const CreateTournament = () => {
         image: ''
     })
 
+    const catchError = (error) => {
+        if(error.response.data){
+            showError(error.response.data)
+        } else {
+            showError("Falló la conexión con el servidor")
+        }
+    }
+
     const showError = (message) => {
         setError(message)
         $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
@@ -60,7 +68,9 @@ const CreateTournament = () => {
                 image: response.data[0].emblem
             })
         })
-        .catch((error) => {showError(error.response.data)})
+        .catch((error) => {
+            catchError(error)
+        })
     }
 
     const createTournament = () => {
@@ -71,7 +81,7 @@ const CreateTournament = () => {
                 }
             )
             .catch((error) => {
-                showError(error.response.data)
+                catchError(error)
             }) 
     }
 
