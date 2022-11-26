@@ -1,17 +1,20 @@
 import "@testing-library/jest-dom"
-import { getCompetitions } from "../../../api/Requests"
 import { render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import CreateTournament from '../CreateTournament'
 
-jest.mock('../../../api/Requests')
+const mockedCompetitions = {data: [{name: 'Serie A', code: 'SA'},{name: 'Primera Division', code: 'PD'}]}
+const mockedGetCompetitions = Promise.resolve(mockedCompetitions)
+
+jest.mock('../../../api/Requests', () => ({
+    ...jest.requireActual('../../../api/Requests'),
+    getCompetitions: () => mockedGetCompetitions
+}))
 
 describe('Create Tournament', () => {
 
     it('estado inicial create tournament', async () => {
-        const mockedCompetitions = {data: [{name: 'Serie A', code: 'SA'},{name: 'Primera Division', code: 'PD'}]}
-        getCompetitions.mockResolvedValue(mockedCompetitions)
         
         render(<BrowserRouter>
                 <Routes>
@@ -29,8 +32,7 @@ describe('Create Tournament', () => {
     })
 
     it('cambio nombre de torneo', async () =>{
-        const mockedCompetitions = {data: [{name: 'Serie A', code: 'SA'},{name: 'Primera Division', code: 'PD'}]}
-        getCompetitions.mockResolvedValue(mockedCompetitions)
+        
         render(<BrowserRouter>
             <Routes>
                 <Route path="*" element={<CreateTournament/>}/>
@@ -46,8 +48,7 @@ describe('Create Tournament', () => {
     })
 
     it('estado inicial competicion', async () =>{
-        const mockedCompetitions = {data: [{name: 'Serie A', code: 'SA'},{name: 'Primera Division', code: 'PD'}]}
-        getCompetitions.mockResolvedValue(mockedCompetitions)
+        
         render(<BrowserRouter>
             <Routes>
                 <Route path="*" element={<CreateTournament/>}/>
@@ -64,8 +65,7 @@ describe('Create Tournament', () => {
     })
 
     it('cambio de competicion', async () =>{
-        const mockedCompetitions = {data: [{name: 'Serie A', code: 'SA'},{name: 'Primera Division', code: 'PD'}]}
-        getCompetitions.mockResolvedValue(mockedCompetitions)
+        
         render(<BrowserRouter>
             <Routes>
                 <Route path="*" element={<CreateTournament/>}/>
@@ -85,8 +85,7 @@ describe('Create Tournament', () => {
     })
 
     it('criterios de puntuación', async () =>{
-        const mockedCompetitions = {data: [{name: 'Serie A', code: 'SA'},{name: 'Primera Division', code: 'PD'}]}
-        getCompetitions.mockResolvedValue(mockedCompetitions)
+        
         render(<BrowserRouter>
             <Routes>
                 <Route path="*" element={<CreateTournament/>}/>
@@ -110,15 +109,12 @@ describe('Create Tournament', () => {
     })
 
     it('seleccionar un criterio de puntuación', async () =>{
-        const mockedCompetitions = {data: [{name: 'Serie A', code: 'SA'},{name: 'Primera Division', code: 'PD'}]}
-        getCompetitions.mockResolvedValue(mockedCompetitions)
+        
         render(<BrowserRouter>
             <Routes>
                 <Route path="*" element={<CreateTournament/>}/>
             </Routes>
         </BrowserRouter>)
-        
-
         
         let select = await screen.findByLabelText(/Criterios/i)
             

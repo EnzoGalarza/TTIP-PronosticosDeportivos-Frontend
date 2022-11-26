@@ -28,6 +28,13 @@ const Login = () => {
         navigate("/register");
     }
 
+    const showError = (message) => {
+        setError(message)
+        $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
+            $('#alertReg').slideUp(500)
+        })
+    }
+
     useEffect(() => {
         $('#alertLogin').hide()
       }, []);
@@ -43,16 +50,12 @@ const Login = () => {
                 navigate("/home");
             })
             .catch((error) => {
-                console.log("Error login", error)
                 if(error.response.data){
-                    setError(error.response.data)
+                    showError(error.response.data)
                 }
                 else {
-                    setError("Falló la conexión con el servidor")
+                    showError("Falló la conexión con el servidor")
                 }
-                $('#alertLogin').fadeTo(2000, 500).slideUp(500, () => {
-                    $('#alertLogin').slideUp(500)
-                })
             });
     };
 

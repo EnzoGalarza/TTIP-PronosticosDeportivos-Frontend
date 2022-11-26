@@ -20,7 +20,6 @@ const Notifications = () => {
     const updateNotifications = () => {
         getNotifications(localStorage.getItem("userId"))
         .then((response) => {
-            console.log("NOTIFICATIONS: ", response.data)
             setUserNotificationsData({
                 notifications: response.data
             })    
@@ -53,7 +52,7 @@ const Notifications = () => {
     const declineInvitation = (userId, notificationId) => {
         deleteNotification(userId,notificationId)
             .then(() => {
-                showConfirmation("Invitación eliminada correctamente")
+                showConfirmation("Invitación rechazada correctamente")
                 updateNotifications()
             })
             .catch((error) => {

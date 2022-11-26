@@ -64,6 +64,13 @@ const RegisterUser = () => {
         setConfirmPassword(event.target.value);
     };
 
+    const showError = (message) => {
+        setError(message)
+        $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
+            $('#alertReg').slideUp(500)
+        })
+    }
+
     useEffect(() => {
         $('#alertReg').hide()
     },[]);
@@ -76,21 +83,15 @@ const RegisterUser = () => {
                 navigate("/login")
             })
             .catch((error) => {
-                if(error.response){
-                    setError(error.response.data)
+                if(error.response.data){
+                    showError(error.response.data)
                 }
                 else {
-                    setError("Not found")
+                    showError("Falló la conexión con el servidor")
                 }
-                $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
-                    $('#alertReg').slideUp(500)
-                })
             });
         } else {
-            setError("Las contraseñas no coinciden")
-            $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
-                $('#alertReg').slideUp(500)
-            })
+            showError("Las contraseñas no coinciden")
         }
     };
 
@@ -146,7 +147,7 @@ const RegisterUser = () => {
                     value={confirmPassword}
                     onChange={handleConfirmPasswordChange}
                 />
-                <label id="SelectLabel" for="image">Elegí tu foto de perfil</label>
+                <label id="SelectLabel" htmlFor="image">Elegí tu foto de perfil</label>
                 <input
                     data-testid="image-selector"
                     id="RegisterImageInput"

@@ -36,3 +36,14 @@ img.comppic:hover{
     text-align: center;
     display: inline-block;
 }
+
+#alert-competition {
+    margin: 10px;
+}
+
+.home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "../styles/Home.css"
 import { getCompetitions } from "../api/Requests"
 import Navbar from "./Navbar";
+import $ from "jquery";
+
 
 const Home = () => {
 
@@ -12,6 +14,15 @@ const Home = () => {
 
     const navigate = useNavigate(); 
 
+    const [error, setError] = useState("")
+
+    const showError = (message) => {
+        setError(message)
+        $('#alertReg').fadeTo(2000, 500).slideUp(500, () => {
+            $('#alertReg').slideUp(500)
+        })
+    }
+
     const updateCompetitions = () => {
         getCompetitions()
         .then((response) => {
@@ -19,7 +30,13 @@ const Home = () => {
                 competitions: response.data
             })
         })
-        .catch((error) => {console.log(error)})
+        .catch((error) => {
+            if(error.response.data){
+                showError(error.response.data)
+            } else {
+                showError("Falló la conexión con el servidor")
+            }
+        })
     }
 
     const competitionMatches = (id) => {
@@ -28,6 +45,7 @@ const Home = () => {
 
     useEffect(() => {
         updateCompetitions();
+        $('alert-competition').hide()
     },[]);
 
     return (
@@ -48,6 +66,9 @@ const Home = () => {
                     })}
                 </div>
                 )}
+            <div id= "alert-competition" className="alert alert-danger" role="alert">
+                {error}
+            </div>    
             </div>
         </>
     )

@@ -1,7 +1,10 @@
 import { render, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { registerUser } from '../../../api/Requests'
 import { BrowserRouter } from 'react-router-dom'
 import Register from '../Register'
+
+jest.mock("../../../api/Requests")
 
 describe('Register', () => {
     
@@ -44,7 +47,8 @@ describe('Register', () => {
         expect(screen.getByTestId('register-password').value).toBe('123')
     })
 
-    it('registrar sin email muestra er', async () => {
+    it('registrar sin email muestra error', async () => {
+        registerUser.mockImplementation(() => Promise.reject({response : {data : "Error"}}))
         render(<BrowserRouter>
             <Register/>
         </BrowserRouter>)
@@ -52,7 +56,7 @@ describe('Register', () => {
         userEvent.click(screen.getByTestId('register-button'))
 
         await waitFor(() => {
-            expect(screen.getByTestId('register-error')).toBeVisible()
+            expect(screen.getByTestId('register-error')).toHaveTextContent("Error")
         })
     })
 })    
