@@ -32,7 +32,6 @@ describe('Create Tournament', () => {
     it('cambio nombre de torneo', async () =>{
         const mockedCompetitions = {data: [{name: 'Serie A', code: 'SA'},{name: 'Primera Division', code: 'PD'}]}
         getCompetitions.mockResolvedValue(mockedCompetitions)
-        act
         render(<BrowserRouter>
             <Routes>
                 <Route path="*" element={<CreateTournament/>}/>

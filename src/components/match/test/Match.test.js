@@ -56,12 +56,9 @@ describe('Match', () => {
         const goals = screen.getByTestId("goals")
         const pronostic = screen.getByTestId("pronostic")
 
-
         expect(local).toHaveTextContent('Burnley FC')
-        expect(local.getElementsByTagName('img')[0].src).toBe('http://localhost/burnley.png')
         expect(visitante).toHaveTextContent('Blackpool FC')
-        expect(visitante.getElementsByTagName('img')[0].src).toBe('http://localhost/blackpool.png')
-        expect(goals.getElementsByClassName("result")[0]).toHaveTextContent("Resultado: 3 - 0")
+        expect(goals).toHaveTextContent("Resultado: 3 - 0")
         expect(pronostic).toHaveTextContent("Tu Pronóstico: 0 - 3")
     })
 
