@@ -49,8 +49,8 @@ describe('Login', () => {
         
         await waitFor(() => {
             expect(mockedUsedNavigate).toHaveBeenCalledTimes(1)
-            expect(mockedUsedNavigate).toHaveBeenCalledWith('/register')
         })
+        expect(mockedUsedNavigate).toHaveBeenCalledWith('/register')
     })
 
     it('si intento ingresar con usuario no valido muestra un error', async () => {
@@ -104,7 +104,7 @@ describe('Login', () => {
         })
         await waitFor(() => {
             expect(mockedUsedNavigate).toHaveBeenCalledTimes(1)
-            expect(mockedUsedNavigate).toHaveBeenCalledWith('/home')
         })
+        expect(mockedUsedNavigate).toHaveBeenCalledWith('/home')
     })
 })    

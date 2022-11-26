@@ -45,7 +45,6 @@ const Home = () => {
 
     useEffect(() => {
         updateCompetitions();
-        $('alert-competition').hide()
     },[]);
 
     return (
@@ -53,7 +52,7 @@ const Home = () => {
             <header>
                 <Navbar/>
             </header>
-            <div class="home">
+            <div className="home">
             { competitionsData.competitions.length > 0 &&
                 (<div class="competitions">
                     {competitionsData.competitions.map(competition =>{
@@ -66,9 +65,9 @@ const Home = () => {
                     })}
                 </div>
                 )}
-            <div id= "alert-competition" className="alert alert-danger" role="alert">
-                {error}
-            </div>    
+                <div id= "alert-competition" className="alert alert-danger" role="alert">
+                    {error}
+                </div>    
             </div>
         </>
     )
