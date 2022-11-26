@@ -7,7 +7,7 @@ function Notification({tournamentId, id, message, acceptable, acceptInvitation, 
     return(
 
         <div className="notifications">
-            <div className="notificationMessage">
+            <div data-testid="notification-message" className="notificationMessage">
                 {message}
             </div>
             <div className="accept">

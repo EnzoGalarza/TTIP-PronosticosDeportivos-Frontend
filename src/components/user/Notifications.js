@@ -71,7 +71,7 @@ const Notifications = () => {
             <header>
                 <Navbar/>
             </header>
-            <div className="tournaments-table-container">
+            <div data-testid="notifications" className="tournaments-table-container">
                 {userNotificationsData.notifications.length > 0 ?
                     <>
                         {userNotificationsData.notifications.map(notification =>{
@@ -82,7 +82,7 @@ const Notifications = () => {
                         })}
                     </>
                     :
-                    <div className="notifications-nodata">
+                    <div data-testid="no-notifications" className="notifications-nodata">
                         No tenés notificaciones
                     </div>
                 }

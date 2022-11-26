@@ -4,7 +4,6 @@ import { render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import CreateTournament from '../CreateTournament'
-import { act } from "react-dom/test-utils"
 
 jest.mock('../../../api/Requests')
 
