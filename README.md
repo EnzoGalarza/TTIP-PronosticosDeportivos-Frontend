@@ -1,4 +1,5 @@
 [![build](https://github.com/EnzoGalarza/TTIP-PronosticosDeportivos-Frontend/actions/workflows/build.yml/badge.svg)](https://github.com/EnzoGalarza/TTIP-PronosticosDeportivos-Frontend/actions/workflows/build.yml)
+[![codecov](https://github.com/EnzoGalarza/TTIP-PronosticosDeportivos-Frontend/blob/master/badges/coverage/coverage.svg)](https://github.com/EnzoGalarza/TTIP-PronosticosDeportivos-Frontend/blob/master/badges/coverage/coverage.svg)
 
 # Getting Started with Create React App
 
