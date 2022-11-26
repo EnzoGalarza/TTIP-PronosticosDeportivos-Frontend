@@ -109,7 +109,6 @@
 
 .itemButton{
   padding-top: 30px;
-  /*font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';*/
   font-size: calc(6px + 2vmin);
 }
 
@@ -117,5 +116,4 @@
     padding-top: 30px;
     text-decoration: underline;
     font-weight: bold;
-    /*font-family: Calibri, 'sans-serif', 'Gill Sans MT', 'Trebuchet MS';*/
 }
