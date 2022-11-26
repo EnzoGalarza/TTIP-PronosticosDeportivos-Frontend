@@ -80,6 +80,7 @@ const Notifications = () => {
     useEffect(() => {
         setTimeout(hide)
         updateNotifications()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     return(
